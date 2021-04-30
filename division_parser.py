@@ -1,13 +1,8 @@
 import re
 
-
-class SkipLineException(Exception):
-    pass
-
-
 class DivisionParser:
 
-    division_name_map = {
+    division_descriptor_name_map = {
         'CAN_3CID_Dv2': '3rd Canadian Infantry',
 
         'FIN_Gr_Raappana_multi': 'Ryhmä Raappana',
@@ -96,16 +91,18 @@ class DivisionParser:
     divisions = {}
     last_div = None
     last_div_descriptor = None
-    divison_match_pattern = r'(^export Descriptor_Deck_Division_)(\w+_multi)(.*$)'
 
     def parse(self, line: str):
         self.parse_division_names(line)
         self.parse_descriptor_id(line)
         self.parse_unit_packs(line)
+        self.parse_alliance(line)
+        self.parse_country_id(line)
 
     def parse_division_names(self, line):
         if line.startswith('export'):
-            matches = re.match(self.divison_match_pattern, line)
+            pattern = r'(^export Descriptor_Deck_Division_)(\w+_multi)(.*$)'
+            matches = re.match(pattern, line)
             if matches:
                 div_name = matches.group(2)
                 self.add_division(div_name)
@@ -119,7 +116,7 @@ class DivisionParser:
         if not div_name:
             return
 
-        real_name = self.division_name_map[div_name]
+        real_name = self.division_descriptor_name_map[div_name]
 
         self.divisions[real_name] = {
             'name': real_name,
@@ -132,7 +129,7 @@ class DivisionParser:
 
     def parse_descriptor_id(self, line):
         if line.startswith('DescriptorId = GUID:') and self.divisions[self.last_div]['GUID'] is None:
-            self.divisions[self.last_div]['GUID'] = line.split('=')[1].strip()
+            self.divisions[self.last_div]['GUID'] = line.split('=')[1].strip().split(':')[1].strip('{}')
 
     def parse_unit_packs(self, line):
 
@@ -150,3 +147,17 @@ class DivisionParser:
                         'name': unit_name,
                         'amount': int(amount)
                     })
+
+    def parse_alliance(self, line):
+        if line.startswith('DivisionNationalite'):
+            alliance = line.split('=')[1].strip().split('/')[1]
+            if self.last_div is not None:
+                self.divisions[self.last_div]['alliance'] = alliance
+
+    def parse_country_id(self, line):
+
+        if line.startswith('CountryId'):
+            country = line.split('=')[1].strip(' "')
+
+            if self.last_div is not None:
+                self.divisions[self.last_div]['country'] = country

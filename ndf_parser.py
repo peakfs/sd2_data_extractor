@@ -1,5 +1,3 @@
-from division_parser import SkipLineException
-
 
 def parse(file, parser_func):
 
@@ -11,13 +9,8 @@ def parse(file, parser_func):
 
     with open(file, 'r') as infile:
         for line in infile:
-
             line = clean_line(line)
-
-            try:
-                parser_func(line)
-            except SkipLineException:
-                continue
+            parser_func(line)
 
 
 def clean_line(line: str) -> str:
