@@ -1,5 +1,6 @@
 import re
 
+
 class DivisionParser:
 
     division_descriptor_name_map = {
@@ -92,25 +93,41 @@ class DivisionParser:
     last_div = None
     last_div_descriptor = None
 
+    def __init__(self):
+        self.parser_methods = [
+            self.parse_division_names,
+            self.parse_descriptor_id,
+            self.parse_unit_packs,
+            self.parse_alliance,
+            self.parse_country_id
+        ]
+
     def parse(self, line: str):
-        self.parse_division_names(line)
-        self.parse_descriptor_id(line)
-        self.parse_unit_packs(line)
-        self.parse_alliance(line)
-        self.parse_country_id(line)
+        for parser_method in self.parser_methods:
+            if parser_method(line):
+                break
+
+    @property
+    def parsed_data(self):
+        return self.divisions
 
     def parse_division_names(self, line):
-        if line.startswith('export'):
-            pattern = r'(^export Descriptor_Deck_Division_)(\w+_multi)(.*$)'
-            matches = re.match(pattern, line)
-            if matches:
-                div_name = matches.group(2)
-                self.add_division(div_name)
-            else:
-                for descriptor, div_name in self.non_std_division_descriptors:
-                    if descriptor in line:
-                        self.add_division(div_name)
-                        break
+
+        if not line.startswith('export'):
+            return False
+
+        pattern = r'(^export Descriptor_Deck_Division_)(\w+_multi)(.*$)'
+        matches = re.match(pattern, line)
+        if matches:
+            div_name = matches.group(2)
+            self.add_division(div_name)
+        else:
+            for descriptor, div_name in self.non_std_division_descriptors:
+                if descriptor in line:
+                    self.add_division(div_name)
+                    break
+
+        return True
 
     def add_division(self, div_name):
         if not div_name:
@@ -120,6 +137,7 @@ class DivisionParser:
 
         self.divisions[real_name] = {
             'name': real_name,
+            'descriptor': div_name,
             'GUID': None,
             'unit_packs': []
         }
@@ -136,23 +154,23 @@ class DivisionParser:
         if line.startswith('(~/Descriptor_Deck_Pack_TOE_'):
             parts = line.split(self.last_div_descriptor)
             if len(parts) > 1:
-                pattern = r'^\_(\w+)_(\w{2,3})\, (\d)\)\,?$'
+                pattern = r'^\_(\w+)\, (\d)\)\,?$'
                 matches = re.match(pattern, parts[1])
 
                 if matches is not None:
-                    unit_name = matches.group(1).replace('_', ' ')
-                    amount = matches.group(3)
+                    unit_name = matches.group(1)
+                    amount = matches.group(2)
 
                     self.divisions[self.last_div]['unit_packs'].append({
-                        'name': unit_name,
-                        'amount': int(amount)
+                        'descriptor': unit_name,
+                        'card_amount': int(amount)
                     })
 
     def parse_alliance(self, line):
         if line.startswith('DivisionNationalite'):
             alliance = line.split('=')[1].strip().split('/')[1]
             if self.last_div is not None:
-                self.divisions[self.last_div]['alliance'] = alliance
+                self.divisions[self.last_div]['alliance'] = alliance.lower()
 
     def parse_country_id(self, line):
 
