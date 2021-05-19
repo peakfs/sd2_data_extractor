@@ -1,1 +1,13 @@
-assets
+# ignore everything
+*.ndf
+*.ndfbin
+*.csv
+*.ini
+
+# except the used assets
+!assets/GameData/Generated/Gameplay/Decks/Divisions.ndf
+!assets/GameData/Generated/Gameplay/Decks/DivisionRules.ndf
+!assets/GameData/Gameplay/Decks/DivisionCostMatrix.ndf
+!assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf
+!assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
+!assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf

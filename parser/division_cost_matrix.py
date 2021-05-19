@@ -46,8 +46,7 @@ class DivisionCostMatrixParser:
 
             if matches:
                 category = matches.group(1).lower()
-                raw_slots = matches.group(2).strip('[]').rstrip(',')
-                raw_slots = raw_slots.split(',')
+                raw_slots = matches.group(2).strip('[]').rstrip(',').split(',')
                 slots = list(map(int, raw_slots))
 
                 div = self.find_division(self.last_div)

@@ -3,7 +3,7 @@ import re
 
 class DivisionParser:
 
-    division_descriptor_name_map = {
+    descriptor_map = {
         'CAN_3CID_Dv2': '3rd Canadian Infantry',
 
         'FIN_Gr_Raappana_multi': 'Ryhmä Raappana',
@@ -65,7 +65,7 @@ class DivisionParser:
         'SOV_43A_Reserve_multi': 'Rezerv 43-y Armii',
         'SOV_44DFusGd_multi': '44-ya Gvard. Strelkovy',
         'SOV_7CMech_multi': '7-y Mechanizi. Korpus',
-        'SOV_7DFus_Esto_multi' : '7. Eesti Laskurdiviis',
+        'SOV_7DFus_Esto_multi': '7. Eesti Laskurdiviis',
         'SOV_84DFusGd_multi': '84-ya Gvard. Strelkovy',
         'SOV_97DFusGd_multi': '97-ya Gvard. Strelkovy',
         'SOV_9GCavGd_multi': '9-ya Gvard. Kavalerii',
@@ -82,7 +82,7 @@ class DivisionParser:
         'US_3rd_Armored_Dv2': '3rd Armored "Spearhead"',
     }
 
-    non_std_division_descriptors = [
+    non_std_descriptors = [
         ('Descriptor_Deck_Division_SOV_NavalGroup_Bakthin', 'SOV_NavalGroup_Bakthin_multi'),
         ('Descriptor_Deck_Division_GR_5_Panzer_Dv2', 'GR_5_Panzer_Dv2'),
         ('Descriptor_Deck_Division_US_3rd_Armored_Dv2', 'US_3rd_Armored_Dv2'),
@@ -122,7 +122,7 @@ class DivisionParser:
             div_name = matches.group(2)
             self.add_division(div_name)
         else:
-            for descriptor, div_name in self.non_std_division_descriptors:
+            for descriptor, div_name in self.non_std_descriptors:
                 if descriptor in line:
                     self.add_division(div_name)
                     break
@@ -133,7 +133,7 @@ class DivisionParser:
         if not div_name:
             return
 
-        real_name = self.division_descriptor_name_map[div_name]
+        real_name = self.descriptor_map[div_name]
 
         self.divisions[real_name] = {
             'name': real_name,
