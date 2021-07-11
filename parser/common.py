@@ -1,27 +1,116 @@
+from distutils.util import strtobool
+from abc import ABC, abstractmethod
+from typing import Any, Match
+
+from .storage import BaseStorage
 
 METER = 0.2
+PARSE_PATTERN_PROPERTY = r'^(\w+)\s+=\s+(.+)$'
+PARSE_PATTERN_EXPORT = r'^export (\w+) is \w+$'
 
 
-def parse_file(file, parser_cls):
-    if not file:
-        raise FileNotFoundError
-
-    if not parser_cls:
-        raise Exception('Missing parser function!')
-
-    with open(file, 'r') as infile:
-        for line in cleaned_lines(infile):
-            parser_cls.parse(line)
+class SkipLineError(TypeError):
+    pass
 
 
-def cleaned_lines(infile):
-    for line in infile:
-        line = line.strip()
+class Handler(ABC):
+    _pattern = None
 
-        if len(line) == 0:
-            continue
+    def __init__(self, pattern=None):
+        self._pattern = pattern
 
-        if line.startswith('//'):
-            continue
+    @property
+    def pattern(self):
+        return self._pattern
 
-        yield line
+    @abstractmethod
+    def handle(self, matches: Match, storage: Any):
+        pass
+
+
+class ExportParser(Handler):
+    def __init__(self):
+        super().__init__(PARSE_PATTERN_EXPORT)
+
+    def handle(self, matches: Match, storage: BaseStorage):
+        export_name = matches.group(1)
+        storage.data[export_name] = {}
+        storage.last_item = export_name
+
+
+class PropertyParser(Handler):
+    def __init__(self):
+        super().__init__(PARSE_PATTERN_PROPERTY)
+
+    @abstractmethod
+    def transform_property(self, matches: Match, storage: BaseStorage):
+        raise NotImplementedError('Parser not implemented!')
+
+    def handle(self, matches: Match, storage: BaseStorage):
+        self.transform_property(matches, storage)
+
+
+class StringPropertyParser(PropertyParser):
+
+    def __init__(self, field_name: str):
+        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        super(PropertyParser, self).__init__(pattern)
+
+    def transform_property(self, matches, storage: BaseStorage):
+        if matches.group(2).startswith('\'') or matches.group(2).startswith('"'):
+            storage.data[storage.last_item][matches.group(1)] = matches.group(2).strip('\'').strip('"')
+
+
+class IntPropertyParser(PropertyParser):
+
+    def __init__(self, field_name: str):
+        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        super(PropertyParser, self).__init__(pattern)
+
+    def transform_property(self, matches: Match, storage: BaseStorage):
+        try:
+            val = int(matches.group(2))
+            storage.data[storage.last_item][matches.group(1)] = val
+        except ValueError:
+            pass
+
+
+class FloatPropertyParser(PropertyParser):
+
+    def __init__(self, field_name: str):
+        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        super(PropertyParser, self).__init__(pattern)
+
+    def transform_property(self, matches: Match, storage: BaseStorage):
+        try:
+            val = float(matches.group(2))
+            storage.data[storage.last_item][matches.group(1)] = val
+        except ValueError:
+            pass
+
+
+class BoolPropertyParser(PropertyParser):
+
+    def __init__(self, field_name: str):
+        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        super(PropertyParser, self).__init__(pattern)
+
+    def transform_property(self, matches: Match, storage: BaseStorage):
+        try:
+            val = bool(strtobool(matches.group(2)))
+            storage.data[storage.last_item][matches.group(1)] = val
+        except ValueError:
+            pass
+
+
+class FormulaParser(PropertyParser):
+    def __init__(self, field_name: str):
+        pattern = fr'^({field_name})\s+=.+\((\d+)\).+$'
+        super(PropertyParser, self).__init__(pattern)
+
+    def transform_property(self, matches: Match, storage: BaseStorage):
+        try:
+            val = int(matches.group(2))
+            storage.data[storage.last_item][matches.group(1)] = val
+        except ValueError:
+            pass

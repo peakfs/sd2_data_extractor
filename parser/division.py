@@ -1,7 +1,80 @@
 import re
 
+from .common import LineParser
+
 
 class DivisionParser:
+
+    multiplayer_divisions = [
+        'Descriptor_Deck_Division_CAN_3CID_Dv2',
+        'Descriptor_Deck_Division_SOV_NavalGroup_Bakthin',
+        'Descriptor_Deck_Division_US_3rd_Armored_Dv2',
+        'FIN_Gr_Raappana_multi',
+        'FIN_Panssaridivisioona_multi',
+        'FR_2e_DB_multi',
+        'GR_116_Panzer_multi',
+        'GR_11SS_Panzergrenadier_multi',
+        'GR_122_Infanterie_multi',
+        'GR_12SS_Panzer_multi',
+        'GR_14_Inf_multi',
+        'GR_16_Panzer_multi',
+        'GR_17SS_Panzergrenadier_multi',
+        'GR_1_Fallschirmjager_multi',
+        'GR_1_Skijager_multi',
+        'GR_20_Panzer_multi',
+        'GR_20_PzGren_multi',
+        'GR_21_Panzer_multi',
+        'GR_25_PzGren_multi',
+        'GR_28_Jager_multi',
+        'GR_352_Infanterie_multi',
+        'GR_3_Fallschirmjager_multi',
+        'GR_52_Sicherungs_multi',
+        'GR_5SS_Panzer_multi',
+        'GR_5_Panzer_Dv2',
+        'GR_78_Sturm_multi',
+        'GR_Gr_Harteneck_multi',
+        'GR_Grossdeutschland_multi',
+        'GR_Koruck_559_multi',
+        'GR_Panzer_HG_multi',
+        'GR_Panzer_Lehr_multi',
+        'GR_Pzverbande_Strachwitz_multi',
+        'HO_1_Hussard_multi',
+        'HO_5_Reserve_multi',
+        'NZ_2nd_NZ_multi',
+        'POL_1DI_AWP_multi',
+        'POL_1_Pancera_multi',
+        'POL_ArmiaKrajowa_multi',
+        'ROU_1_Blindata_multi',
+        'ROU_4_Munte_multi',
+        'ROU_5_CavMot_multi',
+        'SOV_10CCharGd_multi',
+        'SOV_126CFusMont_multi',
+        'SOV_184DFusGd_multi',
+        'SOV_19CChar_multi',
+        'SOV_26DFusGd_multi',
+        'SOV_29CChar_multi',
+        'SOV_2CCharGd_multi',
+        'SOV_358DFusGd_multi',
+        'SOV_3CCharGd_multi',
+        'SOV_3CMechGd_multi',
+        'SOV_3VDV_multi',
+        'SOV_43A_Reserve_multi',
+        'SOV_44DFusGd_multi',
+        'SOV_7CMech_multi',
+        'SOV_7DFus_Esto_multi',
+        'SOV_84DFusGd_multi',
+        'SOV_97DFusGd_multi',
+        'SOV_9GCavGd_multi',
+        'SOV_GM_39A_multi',
+        'SOV_GM_Fedyunkin_multi',
+        'SOV_GM_Tyurin_multi',
+        'SOV_NavalGroup_Bakthin_multi',
+        'SOV_VyborgReserve_multi',
+        'UK_15Scot_multi',
+        'UK_6_Airborne_multi',
+        'US_2nd_Infantry_multi',
+        'US_3rd_Armored_Dv2',
+    ]
 
     descriptor_map = {
         'CAN_3CID_Dv2': '3rd Canadian Infantry',
@@ -116,33 +189,20 @@ class DivisionParser:
         if not line.startswith('export'):
             return False
 
-        pattern = r'(^export Descriptor_Deck_Division_)(\w+_multi)(.*$)'
-        matches = re.match(pattern, line)
-        if matches:
-            div_name = matches.group(2)
-            self.add_division(div_name)
-        else:
-            for descriptor, div_name in self.non_std_descriptors:
-                if descriptor in line:
-                    self.add_division(div_name)
-                    break
+        division_name = LineParser.parse_export_name(line)
+        if division_name in self.multiplayer_divisions:
+            self.add_division(division_name)
 
         return True
 
     def add_division(self, div_name):
-        if not div_name:
-            return
 
-        real_name = self.descriptor_map[div_name]
-
-        self.divisions[real_name] = {
-            'name': real_name,
+        self.divisions[div_name] = {
             'descriptor': div_name,
-            'GUID': None,
             'unit_packs': []
         }
 
-        self.last_div = real_name
+        self.last_div = div_name
         self.last_div_descriptor = div_name
 
     def parse_descriptor_id(self, line):

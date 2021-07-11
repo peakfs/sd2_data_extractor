@@ -1,8 +1,13 @@
+.sd2_extractor.sublime-project
+
 # ignore everything
 *.ndf
 *.ndfbin
 *.csv
 *.ini
+
+venv
+__pycache__
 
 # except the used assets
 !assets/GameData/Generated/Gameplay/Decks/Divisions.ndf
@@ -11,3 +16,4 @@
 !assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf
 !assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
 !assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf
+!assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf
