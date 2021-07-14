@@ -1,16 +1,29 @@
 #! /usr/bin/python3
-
 from pathlib import Path
+
+from database.ammunition import Ammunition
+from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
-from parser.storage import BaseStorage
 
 APP_DIR = Path(__file__).parent
 
 
 def main():
-    p = AmmunitionNdfProcessor(BaseStorage())
-    p.parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
+    create_schemas()
+    export_ammunition()
 
+
+def export_ammunition():
+    session = get_session()
+
+    parsed_ammunition = AmmunitionNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
+    ammunition_list = []
+
+    for name, export_data in parsed_ammunition.items():
+        ammunition_list.append(Ammunition(export_name=name, **export_data))
+
+    session.add_all(ammunition_list)
+    session.commit()
 
 #
 # def parse_divisions():

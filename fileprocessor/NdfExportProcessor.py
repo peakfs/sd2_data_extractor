@@ -41,7 +41,7 @@ class NdfExportProcessor:
                     except SkipLineError:
                         continue
 
-        self.finalize()
+        return self.finalize()
 
     def _clean_lines(self, file) -> str:
         for line in file:

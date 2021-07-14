@@ -1,46 +1,52 @@
-from parser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
-from parser.common import *
 from parser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
+from NdfExportProcessor import NdfExportProcessor
+from database.ammunition import Ammunition
+from parser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
+from parser.common import ExportParser, \
+    StringPropertyParser, \
+    FloatPropertyParser, \
+    FormulaParser, \
+    BoolPropertyParser, \
+    IntPropertyParser
 
 
 class AmmunitionNdfProcessor(NdfExportProcessor):
 
-    def __init__(self, storage: BaseStorage):
-        super().__init__(storage)
+    def __init__(self):
+        super().__init__(BaseStorage())
 
         self.handlers = [
             ExportParser(),
-            StringPropertyParser('Name'),
-            StringPropertyParser('TypeName'),
-            StringPropertyParser('TypeArme'),
-            StringPropertyParser('TypeCategoryName'),
-            StringPropertyParser('Caliber'),
-            FloatPropertyParser('Puissance'),                                   # power
-            FloatPropertyParser('TempsEntreDeuxTirs'),                          # time between two shots
-            FloatPropertyParser('TempsEntreDeuxFx'),                            # time between two fx
-            FormulaParser('PorteeMinimale'),                                    # min range
-            FormulaParser('PorteeMaximale'),                                    # max range
-            FormulaParser('PorteeMinimaleHA'),                                  # high altitude min range
-            FormulaParser('PorteeMaximaleHA'),                                  # high altitude max range
-            FormulaParser('AltitudeAPorteeMaximale'),
-            FormulaParser('DispersionAtMinRange'),
-            FormulaParser('DispersionAtMaxRange'),
-            FloatPropertyParser('CorrectedShotAimtimeMultiplier'),
-            FloatPropertyParser('PhysicalDamages'),                             # phys damage
-            FloatPropertyParser('SuppressDamages'),                             # supression damage
-            BoolPropertyParser('TirIndirect'),                                  # indirect shot
-            BoolPropertyParser('TirReflexe'),                                   # reflex shot
-            IntPropertyParser('SupplyCost'),
+            StringPropertyParser('Name', Ammunition.FIELD_SHORT_NAME),
+            StringPropertyParser('TypeName', Ammunition.FIELD_WEAPON_TYPE),
+            StringPropertyParser('TypeArme', Ammunition.FIELD_WEAPON_NAME),
+            StringPropertyParser('TypeCategoryName', Ammunition.FIELD_WEAPON_TYPE_CATEGORY_NAME),
+            StringPropertyParser('Caliber', Ammunition.FIELD_CALIBER),
+            FloatPropertyParser('Puissance', Ammunition.FIELD_POWER),
+            FloatPropertyParser('TempsEntreDeuxTirs', Ammunition.FIELD_TIME_BETWEEN_SHOTS),
+            FloatPropertyParser('TempsEntreDeuxFx', Ammunition.FIELD_TIME_BETWEEN_FX),
+            FormulaParser('PorteeMinimale', Ammunition.FIELD_RANGE_MIN),
+            FormulaParser('PorteeMaximale', Ammunition.FIELD_RANGE_MAX),
+            FormulaParser('PorteeMinimaleHA', Ammunition.FIELD_RANGE_MIN_HA),
+            FormulaParser('PorteeMaximaleHA', Ammunition.FIELD_RANGE_MAX_HA),
+            FormulaParser('AltitudeAPorteeMaximale', Ammunition.FIELD_ALTITUDE_MAX),
+            FormulaParser('DispersionAtMinRange', Ammunition.FIELD_DISPERSION_AT_MIN_RANGE),
+            FormulaParser('DispersionAtMaxRange', Ammunition.FIELD_DISPERSION_AT_MAX_RANGE),
+            FloatPropertyParser('CorrectedShotAimtimeMultiplier', Ammunition.FIELD_CORRECTED_SHOT_AIMTIME_MULTIPLIER),
+            FloatPropertyParser('PhysicalDamages', Ammunition.FIELD_PHYSICAL_DMG),
+            FloatPropertyParser('SuppressDamages', Ammunition.FIELD_SUPPRESS_DMG),
+            BoolPropertyParser('TirIndirect', Ammunition.FIELD_INDIRECT_SHOT),
+            BoolPropertyParser('TirReflexe', Ammunition.FIELD_DIRECT_SHOT),
+            IntPropertyParser('SupplyCost', Ammunition.FIELD_SUPPLY_COST),
             IdlingHitValueParser(),
             MovingHitValueParser(),
-            FloatPropertyParser('TempsDeVisee'),                                # target time
-            FloatPropertyParser('TempsEntreDeuxSalves'),                        # time between two bursts
-            IntPropertyParser('NbTirParSalves'),                                # shots per burst
-            IntPropertyParser('AffichageMunitionParSalve'),                     # ammunition per shots
-            BoolPropertyParser('PiercingWeapon'),                               # has AP damage
-            StringPropertyParser('DamageTypeEvolutionOverRangeDescriptor')
+            FloatPropertyParser('TempsDeVisee', Ammunition.FIELD_AIM_TIME),
+            FloatPropertyParser('TempsEntreDeuxSalves', Ammunition.FIELD_TIME_BETWEEN_BURSTS),
+            IntPropertyParser('NbTirParSalves', Ammunition.FIELD_SHOTS_PER_BURST),
+            IntPropertyParser('AffichageMunitionParSalve', Ammunition.FIELD_AMMUNITION_PER_BURSTS),
+            BoolPropertyParser('PiercingWeapon', Ammunition.FIELD_ARMOR_PIERCING),
+            StringPropertyParser('DamageTypeEvolutionOverRangeDescriptor', Ammunition.FIELD_DMG_TYPE_OVER_RANGE_DESCRIPTOR)
         ]
 
     def finalize(self):
-        print(self.__class__.__name__ + ' finished')
+        return self.storage.data

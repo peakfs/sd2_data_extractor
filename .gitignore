@@ -1,13 +1,24 @@
-.sd2_extractor.sublime-project
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# PyCharm
+.idea
 
 # ignore everything
 *.ndf
 *.ndfbin
 *.csv
 *.ini
+*.prof
+*.db
 
 venv
 __pycache__
+.pytest_cache
 
 # except the used assets
 !assets/GameData/Generated/Gameplay/Decks/Divisions.ndf

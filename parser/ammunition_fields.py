@@ -16,7 +16,7 @@ class HitValueParser(Handler):
 
 class IdlingHitValueParser(HitValueParser):
 
-    KEY_ACCURACY_IDLING = 'Accuracy_Idling'
+    KEY_ACCURACY_IDLING = 'accuracy_idle'
 
     def __init__(self):
         pattern = r'^\(\w+\/(Idling),\s?(\d+(.\d+)?)\),?$'
@@ -31,7 +31,7 @@ class IdlingHitValueParser(HitValueParser):
 
 
 class MovingHitValueParser(HitValueParser):
-    KEY_ACCURACY_MOVING = 'Accuracy_Moving'
+    KEY_ACCURACY_MOVING = 'accuracy_moving'
 
     def __init__(self):
         pattern = r'^\(\w+\/(Moving),\s?(\d+(.\d+)?)\),?$'
