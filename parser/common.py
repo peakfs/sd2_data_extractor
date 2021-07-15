@@ -156,3 +156,38 @@ class FormulaParser(PropertyParser):
             storage.data[storage.last_item][field_name] = val
         except ValueError:
             pass
+
+
+class TupleParser(Handler):
+
+    field_name = None
+
+    def __init__(self, field_name: str):
+        pattern = r'\((\d+|\d+\.?\d+), (\d+|\d+\.?\d+)\),?'
+
+        if field_name:
+            self.field_name = field_name
+
+        super().__init__(pattern)
+
+    def parse_matches(self, matches: Match):
+        return matches.group(1), matches.group(2)
+
+    def handle(self, matches: Match, storage: BaseStorage):
+
+        if self.field_name not in storage.data[storage.last_item].keys():
+            storage.data[storage.last_item][self.field_name] = []
+        else:
+            storage.data[storage.last_item][self.field_name].append(
+                self.parse_matches(matches)
+            )
+
+
+class IntTupleParser(TupleParser):
+    def parse_matches(self, matches: Match):
+        return int(matches.group(1)), int(matches.group(2))
+
+
+class FloatTupleParser(TupleParser):
+    def parse_matches(self, matches: Match):
+        return float(matches.group(1)), float(matches.group(2))

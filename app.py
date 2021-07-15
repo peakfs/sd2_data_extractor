@@ -1,9 +1,12 @@
 #! /usr/bin/python3
 from pathlib import Path
 
-from database.ammunition import Ammunition
+from database.Ammunition import Ammunition
+from database.DamageRange import DamageRange
 from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
+from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
+from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
 
 APP_DIR = Path(__file__).parent
 
@@ -11,18 +14,47 @@ APP_DIR = Path(__file__).parent
 def main():
     create_schemas()
     export_ammunition()
+    # export_divisions()
+    export_damage_range_tables()
 
 
 def export_ammunition():
-    session = get_session()
-
     parsed_ammunition = AmmunitionNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
     ammunition_list = []
+    session = get_session()
 
     for name, export_data in parsed_ammunition.items():
         ammunition_list.append(Ammunition(export_name=name, **export_data))
 
     session.add_all(ammunition_list)
+    session.commit()
+
+
+# def export_divisions():
+#     parsed_divisions = DivisionsNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/Divisions.ndf')
+#     print(parsed_divisions)
+
+
+def export_damage_range_tables():
+    parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
+    range_list = []
+    session = get_session()
+
+    for name, export_data in parsed_damage_range_tables.items():
+
+        if 'ranges' not in export_data.keys():
+            continue
+
+        for rng, pen in export_data['ranges']:
+            range_list.append(
+                DamageRange(
+                    export_name=name,
+                    range_percentage=rng,
+                    penetration_percentage=pen
+                )
+            )
+
+    session.add_all(range_list)
     session.commit()
 
 #

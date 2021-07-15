@@ -1,6 +1,5 @@
-from parser.common import *
+from parser.common import SkipLineError
 from parser.storage import BaseStorage
-from abc import abstractmethod
 import re
 
 
@@ -19,12 +18,10 @@ class NdfExportProcessor:
     def storage(self, storage: BaseStorage):
         self._storage = storage
 
-    @abstractmethod
     def finalize(self):
-        raise NotImplementedError('finalize must be implemented!')
+        return self.storage.data
 
     def parse_file(self, file):
-
         if not file:
             raise FileNotFoundError
 
@@ -43,7 +40,8 @@ class NdfExportProcessor:
 
         return self.finalize()
 
-    def _clean_lines(self, file) -> str:
+    @staticmethod
+    def _clean_lines(file) -> str:
         for line in file:
             line = line.strip()
 

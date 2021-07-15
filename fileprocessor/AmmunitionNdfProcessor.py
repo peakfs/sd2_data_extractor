@@ -1,6 +1,6 @@
 from parser.storage import BaseStorage
-from NdfExportProcessor import NdfExportProcessor
-from database.ammunition import Ammunition
+from .NdfExportProcessor import NdfExportProcessor
+from database.Ammunition import Ammunition
 from parser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
 from parser.common import ExportParser, \
     StringPropertyParser, \
@@ -45,7 +45,10 @@ class AmmunitionNdfProcessor(NdfExportProcessor):
             IntPropertyParser('NbTirParSalves', Ammunition.FIELD_SHOTS_PER_BURST),
             IntPropertyParser('AffichageMunitionParSalve', Ammunition.FIELD_AMMUNITION_PER_BURSTS),
             BoolPropertyParser('PiercingWeapon', Ammunition.FIELD_ARMOR_PIERCING),
-            StringPropertyParser('DamageTypeEvolutionOverRangeDescriptor', Ammunition.FIELD_DMG_TYPE_OVER_RANGE_DESCRIPTOR)
+            StringPropertyParser(
+                'DamageTypeEvolutionOverRangeDescriptor',
+                Ammunition.FIELD_DMG_TYPE_OVER_RANGE_DESCRIPTOR
+            )
         ]
 
     def finalize(self):
