@@ -7,15 +7,17 @@ from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
 from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
 from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
+from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 
 APP_DIR = Path(__file__).parent
 
 
 def main():
-    create_schemas()
-    export_ammunition()
+    # create_schemas()
+    # export_ammunition()
     # export_divisions()
-    export_damage_range_tables()
+    # export_damage_range_tables()
+    export_weapons()
 
 
 def export_ammunition():
@@ -60,6 +62,11 @@ def export_damage_range_tables():
 
     session.add_all(range_list)
     session.commit()
+
+def export_weapons():
+
+    export_data = WeaponDescriptorNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
+    print(export_data)
 
 #
 # def parse_divisions():

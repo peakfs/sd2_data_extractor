@@ -50,6 +50,3 @@ class AmmunitionNdfProcessor(NdfExportProcessor):
                 Ammunition.FIELD_DMG_TYPE_OVER_RANGE_DESCRIPTOR
             )
         ]
-
-    def finalize(self):
-        return self.storage.data
