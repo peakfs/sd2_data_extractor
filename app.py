@@ -24,6 +24,10 @@ def export_ammunition():
     session = get_session()
 
     for name, export_data in parsed_ammunition.items():
+
+        if export_data['dmg_type_over_range_descriptor']:
+            export_data['dmg_type_over_range_descriptor'] = export_data['dmg_type_over_range_descriptor'].lstrip('~/')
+
         ammunition_list.append(Ammunition(export_name=name, **export_data))
 
     session.add_all(ammunition_list)
