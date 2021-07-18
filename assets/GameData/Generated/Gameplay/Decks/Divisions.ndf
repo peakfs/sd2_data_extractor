@@ -3014,7 +3014,7 @@ export Descriptor_Deck_Division_FIN_Gr_Raappana_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Howz_ob1927_76mm_FIN, 1),
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Jaeger_CMD_FIN, 3),
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Jaeger_Eng_FIN, 1),
-        (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Jaeger_FIN, 4),
+        (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Jaeger_FIN, 3),
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Ju_88_A4_x28_50_FIN, 1),
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Ju_88_A4_x2_500_FIN, 2),
         (~/Descriptor_Deck_Pack_TOE_FIN_Gr_Raappana_multi_Kanonier_FIN, 1),
@@ -3576,7 +3576,7 @@ export Descriptor_Deck_Division_FIN_Panssaridivisioona_multi is TDeckDivisionDes
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Jaeger_CMD_FIN, 3),
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Jaeger_CO_FIN, 1),
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Jaeger_Eng_FIN, 1),
-        (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Jaeger_FIN, 6),
+        (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Jaeger_FIN, 4),
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Ju_87D_5_AB_250_3_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_Ju_87D_5_x4_50_GER, 2),
         (~/Descriptor_Deck_Pack_TOE_FIN_Panssaridivisioona_multi_KV_1S_FIN, 1),
@@ -3819,6 +3819,186 @@ export Descriptor_Deck_Division_FIN_URR_Ilomantsi_HB is TDeckDivisionDescriptor
         "Texture_Division_Flag_FIN_57",
     ]
 )
+export Descriptor_Deck_Division_FR_1e_DFL_multi is TDeckDivisionDescriptor
+(
+    DescriptorId = GUID:{2655d45a-3997-44f0-8d8e-c44c813d0efa}
+    DivisionName = 'YRGMZHMXLN'
+    DivisionNickname = ''
+    DivisionDescription = 'DESFR1DFL'
+    DivisionPowerClassification = 'DC_PWR2'
+    DivisionNationalite = ENationalite/Allied
+    DivisionTags = ['West', 'DEFAULT', 'FR', 'Allied', 'soldier', 'DC_PWR2']
+    DivisionEconomyList = DivisionEconomy_FR_1e_DFL_multi
+    UncensoredHintGUID = GUID:{ca52898b-d1a6-4e12-b490-da4fc2e475b0}
+    TypeHintTitleToken = ''
+    TypeHintBodyToken = ''
+    TypeHintExtendedToken = ''
+    DescriptionHintTitleToken = ''
+    DescriptionHintBodyToken = ''
+    DescriptionHintExtendedToken = ''
+    AvailableForPlay = True
+    PhaseList =
+    [
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_A'
+            PhaseStartTimeInSeconds = 0
+            PhaseBonus = 0
+            PhaseIncome = 100
+        ),
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_B'
+            PhaseStartTimeInSeconds = 600
+            PhaseBonus = 0
+            PhaseIncome = 125
+        ),
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_C'
+            PhaseStartTimeInSeconds = 1200
+            PhaseBonus = 0
+            PhaseIncome = 140
+        ),
+    ]
+    PackList = MAP
+    [
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Artillery_Cmdr_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Artilleurs_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_BIMP_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_BIMP_Ldr_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_BIMP_TRANAPE_ACE_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_B_26G_25_MA_Marauder_x2_907_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_B_26G_25_MA_Marauder_x8_227_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Barbed_Wire, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Bazooka_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Bunker_AT_57mm_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Bunker_HMG_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Bunker_MG_FR, 4),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Canon_37mmAT_Tir_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Canon_6pdr_FR, 5),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Cmdo_Afrique_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Commander_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_ConvertedGunners_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_DCA_Bofors_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_DMA_Supply, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_F6F_5_Hellcat_F_Mk_II_x2_454_UK, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_F6F_5_Hellcat_F_Mk_II_x6_127mm_AP_UK, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_FFI_Maquisards_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_FFI_PzFaust, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_FFI_SideCar, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_FFI_Traction_CMD, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Groupe_RFM_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Gunner_Nest, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_HMG_M1917_Browning_Tir_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_HMG_M2HB_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Howz_LongTom_155mm_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Howz_M2_105mm_FR, 4),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Howz_M3_105mm_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Jeep_HMG_RFM_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_L2_Grasshopper_Fao_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Ldr_FFI_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Legion_FR, 4),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Legion_Ldr_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Legion_Sapeurs_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_M10A1_Wolverine_RCA_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_M10A1_Wolverine_RCA_cav_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_M20_Command_Car_Tir_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_M8_Greyhound_RFM_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_MMG_M1919_Legion_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Mortier_60mm_Tir_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Mortier_81mm_FR, 5),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_P_38J_5_F_5B_1_Lightning_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_P_39Q_15_Airacobra_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_P_47D_22_x1_227_Thunderbolt_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_P_47D_22_x2_454_x1_227_Thunderbolt_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Para_Choc_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Pioniers_Tir_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Sapeurs_Ldr_Tir_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Sapeurs_Tir_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Scott_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Scout_RFM_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Seafire_FR_Mk_III_UK, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Sherman_M4A4_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Spitfire_LF_Mk_VIIIc_x1_227_x2_113_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Spitfire_Mk_Vb_trop_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Stuart_M3A3_Command_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Stuart_M3A3_RFM_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Stuart_M5A1_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Tirailleurs_AEF_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Tirailleurs_AFN_FR, 1),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Tirailleurs_Ldr_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Trench, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Truck_GMC_Supply_FR, 2),
+        (~/Descriptor_Deck_Pack_TOE_FR_1e_DFL_multi_Wildcat_V_UK, 1),
+    ]
+    MaxActivationPoints = 50
+    CostMatrix = MatrixCostName_FR_1e_DFL_multi
+    EmblemTexture     = "Texture_Division_Emblem_1e_DFL"
+    PortraitTexture   = "Texture_Division_Portrait_Brosset"
+    TypeTexture       = "Texture_Division_Type_soldier"
+    CountryId = "FR"
+    FlagAnimationTextures = [
+        "Texture_Division_Flag_FR_0",
+        "Texture_Division_Flag_FR_1",
+        "Texture_Division_Flag_FR_2",
+        "Texture_Division_Flag_FR_3",
+        "Texture_Division_Flag_FR_4",
+        "Texture_Division_Flag_FR_5",
+        "Texture_Division_Flag_FR_6",
+        "Texture_Division_Flag_FR_7",
+        "Texture_Division_Flag_FR_8",
+        "Texture_Division_Flag_FR_9",
+        "Texture_Division_Flag_FR_10",
+        "Texture_Division_Flag_FR_11",
+        "Texture_Division_Flag_FR_12",
+        "Texture_Division_Flag_FR_13",
+        "Texture_Division_Flag_FR_14",
+        "Texture_Division_Flag_FR_15",
+        "Texture_Division_Flag_FR_16",
+        "Texture_Division_Flag_FR_17",
+        "Texture_Division_Flag_FR_18",
+        "Texture_Division_Flag_FR_19",
+        "Texture_Division_Flag_FR_20",
+        "Texture_Division_Flag_FR_21",
+        "Texture_Division_Flag_FR_22",
+        "Texture_Division_Flag_FR_23",
+        "Texture_Division_Flag_FR_24",
+        "Texture_Division_Flag_FR_25",
+        "Texture_Division_Flag_FR_26",
+        "Texture_Division_Flag_FR_27",
+        "Texture_Division_Flag_FR_28",
+        "Texture_Division_Flag_FR_29",
+        "Texture_Division_Flag_FR_30",
+        "Texture_Division_Flag_FR_31",
+        "Texture_Division_Flag_FR_32",
+        "Texture_Division_Flag_FR_33",
+        "Texture_Division_Flag_FR_34",
+        "Texture_Division_Flag_FR_35",
+        "Texture_Division_Flag_FR_36",
+        "Texture_Division_Flag_FR_37",
+        "Texture_Division_Flag_FR_38",
+        "Texture_Division_Flag_FR_39",
+        "Texture_Division_Flag_FR_40",
+        "Texture_Division_Flag_FR_41",
+        "Texture_Division_Flag_FR_42",
+        "Texture_Division_Flag_FR_43",
+        "Texture_Division_Flag_FR_44",
+        "Texture_Division_Flag_FR_45",
+        "Texture_Division_Flag_FR_46",
+        "Texture_Division_Flag_FR_47",
+        "Texture_Division_Flag_FR_48",
+        "Texture_Division_Flag_FR_49",
+        "Texture_Division_Flag_FR_50",
+        "Texture_Division_Flag_FR_51",
+        "Texture_Division_Flag_FR_52",
+        "Texture_Division_Flag_FR_53",
+        "Texture_Division_Flag_FR_54",
+        "Texture_Division_Flag_FR_55",
+        "Texture_Division_Flag_FR_56",
+        "Texture_Division_Flag_FR_57",
+    ]
+)
 export Descriptor_Deck_Division_FR_2e_DB_multi is TDeckDivisionDescriptor
 (
     DescriptorId = GUID:{ecadbcb5-cc34-403a-8aaa-886f9b5f7bcc}
@@ -3889,7 +4069,7 @@ export Descriptor_Deck_Division_FR_2e_DB_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_Lance_Flammes_FR, 1),
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_Ldr_Spahis_FR, 2),
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_Ldr_Voltigeur_FR, 2),
-        (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_M10A1_Wolverine_FR, 3),
+        (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_M10A1_Wolverine_FR, 4),
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_M20_Command_Car_FR, 1),
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_M8_Greyhound_FR, 3),
         (~/Descriptor_Deck_Pack_TOE_FR_2e_DB_multi_M8_Greyhound_RBFM_FR, 2),
@@ -6407,7 +6587,7 @@ export Descriptor_Deck_Division_GR_116_Panzer_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Ju_87_D_x4_50, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Kubelwagen_Beo, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_116_Panzer_multi_Marder_II, 1),
@@ -7188,7 +7368,7 @@ export Descriptor_Deck_Division_GR_12SS_Panzer_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Ju_188_x28_50_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Mortier_GrW_80mm, 5),
         (~/Descriptor_Deck_Pack_TOE_GR_12SS_Panzer_multi_Opel_Blitz_Supply, 3),
@@ -8702,7 +8882,7 @@ export Descriptor_Deck_Division_GR_17SS_Panzergrenadier_multi is TDeckDivisionDe
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Ju_88_S_500, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Kdr_PzGr_PzFaust_GER, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Kdr_PzGr_PzFaust_GER, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Kubelwagen_Beo_152, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Marder_III_H_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_17SS_Panzergrenadier_multi_Marder_III_M, 1),
@@ -9841,7 +10021,7 @@ export Descriptor_Deck_Division_GR_20_Panzer_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kdr_Battlegroup_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Lehr_Pionier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_20_Panzer_multi_Marder_I, 2),
@@ -10434,7 +10614,7 @@ export Descriptor_Deck_Division_GR_21_Panzer_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Ju_88_S_Supply, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Konigstiger_Porsche, 4),
         (~/Descriptor_Deck_Pack_TOE_GR_21_Panzer_multi_Marder_I, 2),
@@ -11106,7 +11286,7 @@ export Descriptor_Deck_Division_GR_25_PzGren_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kdr_Battlegroup_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Kdr_PzGrenadier_GR, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Marder_II, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_25_PzGren_multi_Me_109G4_GER, 2),
@@ -14001,7 +14181,7 @@ export Descriptor_Deck_Division_GR_3_Fallschirmjager_multi is TDeckDivisionDescr
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Ju_88_S_50, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Ju_88_S_AB_1000_2, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kdr_Battlegroup_FJ_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kdr_Fallschirm_GR, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kdr_Fallschirm_GR, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kdr_LW_Jager_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kubelwagen_Beo, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_3_Fallschirmjager_multi_Kubelwagen_Supply, 2),
@@ -15748,7 +15928,7 @@ export Descriptor_Deck_Division_GR_5SS_Panzer_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Ju_88G1_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Kdr_PzGrenadier_WK_GR, 2),
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Lehr_Pionier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5SS_Panzer_multi_Maultier_Vielfachwerfer, 1),
@@ -16045,7 +16225,7 @@ export Descriptor_Deck_Division_GR_5_Panzer_Dv2 is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Hummel, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Lehr_Pionier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_5_Panzer_Dv2_Marder_III_M, 1),
@@ -23137,7 +23317,7 @@ export Descriptor_Deck_Division_GR_Panzer_HG_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kdr_Battlegroup_HG_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kdr_Pionier_HG_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kdr_PzGr_PzFaust_HG_GR, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kdr_PzGr_PzFaust_HG_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_Kdr_PzGrenadier_HG_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_LW_Mort_120mm_HG_GR, 3),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_HG_multi_LW_Mort_80mm_HG_GR, 3),
@@ -23318,7 +23498,7 @@ export Descriptor_Deck_Division_GR_Panzer_Lehr_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Jagdpanzer_IV, 4),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Kanonier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Kdr_Pionier_GR, 1),
-        (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Kdr_PzGr_PzFaust_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Kdr_PzGr_PzFaust_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Kdr_PzGrenadier_GR, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Lehr_Pionier_GER, 1),
         (~/Descriptor_Deck_Pack_TOE_GR_Panzer_Lehr_multi_Marder_III_M, 2),
@@ -24230,6 +24410,193 @@ export Descriptor_Deck_Division_GR_Stab_StrmRgt195_Autobahn_HB is TDeckDivisionD
         "Texture_Division_Flag_SS_57",
     ]
 )
+export Descriptor_Deck_Division_GR_Verteidigungsbereich_Toulon_multi is TDeckDivisionDescriptor
+(
+    DescriptorId = GUID:{27009e89-6f69-461b-b27e-150aa0b1061c}
+    DivisionName = 'UZVAONXERJ'
+    DivisionNickname = ''
+    DivisionDescription = 'DESGRToulo'
+    DivisionPowerClassification = 'DC_PWR3'
+    DivisionNationalite = ENationalite/Axis
+    DivisionTags = ['East', 'DEFAULT', 'SS', 'Axis', 'soldier', 'DC_PWR3']
+    DivisionEconomyList = DivisionEconomy_GR_Verteidigungsbereich_Toulon_multi
+    UncensoredHintGUID = GUID:{67f59c91-ec9b-44f3-9be7-6b8e8a3a6fb9}
+    TypeHintTitleToken = ''
+    TypeHintBodyToken = ''
+    TypeHintExtendedToken = ''
+    DescriptionHintTitleToken = ''
+    DescriptionHintBodyToken = ''
+    DescriptionHintExtendedToken = ''
+    AvailableForPlay = True
+    PhaseList =
+    [
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_A'
+            PhaseStartTimeInSeconds = 0
+            PhaseBonus = 0
+            PhaseIncome = 100
+        ),
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_B'
+            PhaseStartTimeInSeconds = 600
+            PhaseBonus = 0
+            PhaseIncome = 125
+        ),
+        TPhaseDescriptor
+        (
+            PhaseName = 'PHASE_C'
+            PhaseStartTimeInSeconds = 1200
+            PhaseBonus = 0
+            PhaseIncome = 140
+        ),
+    ]
+    PackList = MAP
+    [
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Ar_196_A3_Obs138mm_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Ar_196_A3_Obs340mm_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Aufklarer_GR, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_BMW_R75, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Barbed_Wire, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Batteriefuhrer_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bef_BMW_R75, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Brandenburger_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bunker_AT_75mm_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bunker_AT_Panzerstellung_PzII_20mm_GER, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bunker_AT_Panzerstellung_R35_37mm_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bunker_AT_Panzerstellung_S35_47mm_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Bunker_HMG42, 4),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Canon_47mm_Breda_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Canon_F22_AT_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_DCA_75mm_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Do_217_K1_x26_50_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flak_36_37mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flak_36_88mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flak_37_Zwillinge_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flak_38_105mm_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flak_38_20mm, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Flakvierling_20mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Fusilier_GR, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Fw_190_F8_x12_80mm_AP_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Grenadier_Breda30_GER, 4),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Grenadier_Faust_GR, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Gunner_Nest, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_H39_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_HMG_MG34_GR, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_HMG_MG42, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_100mm_vz28_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_149mm_M19_GER, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_M20_152mm_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_Schneider_105mm_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_Skoda_100mm_1916_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_Skoda_75mm_direct_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_sIG_33_150mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Howz_sk18_100mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Ju_88_A4_x2_500_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Boot_Besatzung_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Fuhrer_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Kustenpolizei_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Landeschutzen_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Marineinfanterie_GER, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_KM_Pionier_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Kanonier_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Kdr_Battlegroup_GR, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Kdr_Grenadier_GR, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_MEK_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_MG_08_KM_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Marder_I, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Me_109_G6_BR21_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Me_109_G6_R1_x1_250_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Me_109_G6_R6, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Me_109_G6_U4_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Me_410_A3_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Mortier_GrW_120mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Mortier_GrW_50mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Mortier_GrW_80mm, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Opel_Blitz_Supply, 3),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Ostlegion_GR, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_PaK_40_75mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_PaK_43_88mm, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_PzPSturmPio_GR, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_PzPionier_GR, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_R35_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_RSO_Pak40_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_SanMarco_RSI, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Scharfschutze_GER, 2),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Sicherungs_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_StuG_III_G, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_StuG_III_G_Fu_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Traction_CMD_GER, 1),
+        (~/Descriptor_Deck_Pack_TOE_GR_Verteidigungsbereich_Toulon_multi_Trench, 2),
+    ]
+    MaxActivationPoints = 50
+    CostMatrix = MatrixCostName_GR_Verteidigungsbereich_Toulon_multi
+    EmblemTexture     = "Texture_Division_Emblem_242_Infanterie"
+    PortraitTexture   = "Texture_Division_Portrait_Bassler"
+    TypeTexture       = "Texture_Division_Type_soldier"
+    CountryId = "SS"
+    FlagAnimationTextures = [
+        "Texture_Division_Flag_SS_0",
+        "Texture_Division_Flag_SS_1",
+        "Texture_Division_Flag_SS_2",
+        "Texture_Division_Flag_SS_3",
+        "Texture_Division_Flag_SS_4",
+        "Texture_Division_Flag_SS_5",
+        "Texture_Division_Flag_SS_6",
+        "Texture_Division_Flag_SS_7",
+        "Texture_Division_Flag_SS_8",
+        "Texture_Division_Flag_SS_9",
+        "Texture_Division_Flag_SS_10",
+        "Texture_Division_Flag_SS_11",
+        "Texture_Division_Flag_SS_12",
+        "Texture_Division_Flag_SS_13",
+        "Texture_Division_Flag_SS_14",
+        "Texture_Division_Flag_SS_15",
+        "Texture_Division_Flag_SS_16",
+        "Texture_Division_Flag_SS_17",
+        "Texture_Division_Flag_SS_18",
+        "Texture_Division_Flag_SS_19",
+        "Texture_Division_Flag_SS_20",
+        "Texture_Division_Flag_SS_21",
+        "Texture_Division_Flag_SS_22",
+        "Texture_Division_Flag_SS_23",
+        "Texture_Division_Flag_SS_24",
+        "Texture_Division_Flag_SS_25",
+        "Texture_Division_Flag_SS_26",
+        "Texture_Division_Flag_SS_27",
+        "Texture_Division_Flag_SS_28",
+        "Texture_Division_Flag_SS_29",
+        "Texture_Division_Flag_SS_30",
+        "Texture_Division_Flag_SS_31",
+        "Texture_Division_Flag_SS_32",
+        "Texture_Division_Flag_SS_33",
+        "Texture_Division_Flag_SS_34",
+        "Texture_Division_Flag_SS_35",
+        "Texture_Division_Flag_SS_36",
+        "Texture_Division_Flag_SS_37",
+        "Texture_Division_Flag_SS_38",
+        "Texture_Division_Flag_SS_39",
+        "Texture_Division_Flag_SS_40",
+        "Texture_Division_Flag_SS_41",
+        "Texture_Division_Flag_SS_42",
+        "Texture_Division_Flag_SS_43",
+        "Texture_Division_Flag_SS_44",
+        "Texture_Division_Flag_SS_45",
+        "Texture_Division_Flag_SS_46",
+        "Texture_Division_Flag_SS_47",
+        "Texture_Division_Flag_SS_48",
+        "Texture_Division_Flag_SS_49",
+        "Texture_Division_Flag_SS_50",
+        "Texture_Division_Flag_SS_51",
+        "Texture_Division_Flag_SS_52",
+        "Texture_Division_Flag_SS_53",
+        "Texture_Division_Flag_SS_54",
+        "Texture_Division_Flag_SS_55",
+        "Texture_Division_Flag_SS_56",
+        "Texture_Division_Flag_SS_57",
+    ]
+)
 export Descriptor_Deck_Division_HO_1_Hussard_multi is TDeckDivisionDescriptor
 (
     DescriptorId = GUID:{d573e4d6-0f3f-4fc8-b8f7-8edb262a63d9}
@@ -24865,7 +25232,7 @@ export Descriptor_Deck_Division_NZ_2nd_NZ_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Baltimore_Mk_V_x4_227_GRE, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Barbed_Wire, 1),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_UK, 1),
-        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_x8_150mm_UK, 2),
+        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_x8_150mm_AP_UK, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Bunker_AT_6pdr_NZ, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Bunker_MG_NZ, 4),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Canon_17pdr_NZ, 3),
@@ -24913,7 +25280,7 @@ export Descriptor_Deck_Division_NZ_2nd_NZ_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Sherman_M4A2_NZ, 6),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Sherman_M4_105_NZ, 1),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Snipers_GRE, 2),
-        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Spitfire_LF_Mk_IXc_SA, 1),
+        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Spitfire_FR_Mk_IXc_SA, 1),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Spitfire_LF_Mk_VIIIc_x1_230_x2_110_CAN, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Spitfire_Mk_Vc_trop_GRE, 1),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Spitfire_Mk_Vc_trop_MITRALEXIS_Ace_GRE, 1),
@@ -25173,7 +25540,7 @@ export Descriptor_Deck_Division_POL_1DI_AWP_multi is TDeckDivisionDescriptor
     [
         (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_ATR_PTRS_41_POL, 2),
         (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_Artilleur_AWP, 1),
-        (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_Avtomatchiki_CMD_POL, 2),
+        (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_Avtomatchiki_CMD_POL, 1),
         (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_Avtomatchiki_POL, 4),
         (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_BA_10M_AWP, 1),
         (~/Descriptor_Deck_Pack_TOE_POL_1DI_AWP_multi_Barbed_Wire, 1),
@@ -28777,7 +29144,7 @@ export Descriptor_Deck_Division_ROU_5_CavMot_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Pionieri_CMD_ROU, 1),
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Pionieri_ROU, 1),
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_Assault_ROU, 1),
-        (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_CMD_ROU, 4),
+        (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_CMD_ROU, 3),
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_Pionieri_CMD_ROU, 1),
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_Pionieri_ROU, 1),
         (~/Descriptor_Deck_Pack_TOE_ROU_5_CavMot_multi_Rosorio_ROU, 5),
@@ -32362,7 +32729,7 @@ export Descriptor_Deck_Division_SOV_10CCharGd_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_T34_85_obr_43_reco_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_T34_85_obr_44_KOMBAT_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_T34_85_obr_44_SOV, 2),
-        (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_Tankodesantniki_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_Tankodesantniki_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_Tankodesantniki_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_Tiger_E_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_10CCharGd_multi_Trench, 2),
@@ -48313,8 +48680,8 @@ export Descriptor_Deck_Division_SOV_26DFusGd_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Truck_Studebaker_BM31_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Truck_Studebaker_Supply_SOV, 3),
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Truck_ZIS5V_DSHK_SOV, 2),
-        (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Yak_9B_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Yak_9B_x100_PTAB_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Yak_9B_x2_100_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Yak_9B_x4_100_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_26DFusGd_multi_Yak_9_SOV, 3),
     ]
@@ -50187,7 +50554,7 @@ export Descriptor_Deck_Division_SOV_29CChar_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_T34_85_obr_43_SOV, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_T34_85_obr_44_KOMBAT_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_T34_85_obr_44_SOV, 6),
-        (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_Tankodesantniki_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_Tankodesantniki_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_Tankodesantniki_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_Trench, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_29CChar_multi_Truck_GAZ_AAA_Maxim_SOV, 3),
@@ -50970,7 +51337,7 @@ export Descriptor_Deck_Division_SOV_2CCharGd_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_T34_85_obr_43_SOV, 5),
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_T34_85_obr_44_KOMBAT_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_T34_85_obr_44_SOV, 4),
-        (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_Tankodesantniki_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_Tankodesantniki_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_Tankodesantniki_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_Trench, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_2CCharGd_multi_Truck_GAZ_AAA_Maxim_SOV, 3),
@@ -59341,7 +59708,7 @@ export Descriptor_Deck_Division_SOV_3CCharGd_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_SideCar_HarleyD_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_SideCar_MG_HarleyD_SOV, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_SideCar_Mortier_HarleyD_SOV, 1),
-        (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_Tankodesantniki_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_Tankodesantniki_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_Tankodesantniki_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_Trench, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_3CCharGd_multi_Truck_GAZ_AAA_Maxim_SOV, 1),
@@ -61970,7 +62337,7 @@ export Descriptor_Deck_Division_SOV_43A_Reserve_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_SU_122_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_SU_152_SOV, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_SU_85_SOV, 1),
-        (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_Saperny_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_Saperny_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_Saperny_LPO_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_Saperny_SMG_SOV, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_43A_Reserve_multi_Saperny_SOV, 4),
@@ -79813,7 +80180,7 @@ export Descriptor_Deck_Division_SOV_GM_Tyurin_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_T34_76_obr_41_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_T34_76_obr_42_SOV, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_T34_76_obr_43_SOV, 3),
-        (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_Tankodesantniki_CMD_SOV, 2),
+        (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_Tankodesantniki_CMD_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_Tankodesantniki_SOV, 1),
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_Trench, 2),
         (~/Descriptor_Deck_Pack_TOE_SOV_GM_Tyurin_multi_Truck_GAZ_AAA_Maxim_SOV, 1),
@@ -81126,7 +81493,7 @@ export Descriptor_Deck_Division_UK_6_Airborne_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Gunner_Nest, 2),
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_HMG_Vickers_AB_UK, 2),
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_HMG_Vickers_UK, 2),
-        (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Howz_M1_75mm_UK, 2),
+        (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Howz_M1_75mm_AB_UK, 2),
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Jeep_AB_CO_valide_UK, 1),
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Jeep_OP_UK, 1),
         (~/Descriptor_Deck_Pack_TOE_UK_6_Airborne_multi_Jeep_Supply_AB_UK, 2),
