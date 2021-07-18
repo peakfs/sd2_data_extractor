@@ -1,7 +1,7 @@
-from typing import Any, Match
-
+from typing import Match
 from .common import Handler
 from .storage import BaseStorage
+
 
 class SalvoParser(Handler):
 

@@ -1,10 +1,7 @@
-from abc import ABC
-
-
-class BaseStorage(ABC):
-    _data = {}
+class BaseStorage:
+    data = {}
     last_item = None
 
-    @property
-    def data(self):
-        return self._data
+    def __init__(self):
+        self.data = {}
+        self.last_item = None

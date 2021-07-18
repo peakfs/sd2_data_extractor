@@ -3,6 +3,8 @@ from pathlib import Path
 
 from database.Ammunition import Ammunition
 from database.DamageRange import DamageRange
+from database.Weapon import Weapon
+from database.WeaponAmmunition import WeaponAmmunition
 from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
 from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
@@ -13,27 +15,26 @@ APP_DIR = Path(__file__).parent
 
 
 def main():
-    # create_schemas()
-    # export_ammunition()
+    create_schemas()
+    export_ammunition()
     # export_divisions()
-    # export_damage_range_tables()
+    export_damage_range_tables()
     export_weapons()
 
 
 def export_ammunition():
     parsed_ammunition = AmmunitionNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
     ammunition_list = []
-    session = get_session()
 
     for name, export_data in parsed_ammunition.items():
-
         if export_data['dmg_type_over_range_descriptor']:
             export_data['dmg_type_over_range_descriptor'] = export_data['dmg_type_over_range_descriptor'].lstrip('~/')
 
         ammunition_list.append(Ammunition(export_name=name, **export_data))
 
-    session.add_all(ammunition_list)
-    session.commit()
+    with get_session() as session:
+        session.add_all(ammunition_list)
+        session.commit()
 
 
 # def export_divisions():
@@ -44,7 +45,6 @@ def export_ammunition():
 def export_damage_range_tables():
     parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
     range_list = []
-    session = get_session()
 
     for name, export_data in parsed_damage_range_tables.items():
 
@@ -60,13 +60,34 @@ def export_damage_range_tables():
                 )
             )
 
-    session.add_all(range_list)
-    session.commit()
+    with get_session() as session:
+        session.add_all(range_list)
+        session.commit()
+
 
 def export_weapons():
+    weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
+    weapon_list = []
+    pivot_list = []
 
-    export_data = WeaponDescriptorNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
-    print(export_data)
+    for key, weapon_data in weapon_export_data.items():
+        weapon_list.append(Weapon(export_name=key))
+
+        plist = list(zip(weapon_data['salvos'], weapon_data['ammunition']))
+
+        for salvo, ammunition in plist:
+            pivot_list.append(
+                WeaponAmmunition(
+                    weapon_export_name=key,
+                    ammunition_export_name=ammunition,
+                    salvos=salvo
+                )
+            )
+
+    with get_session() as session:
+        session.add_all(weapon_list)
+        session.add_all(pivot_list)
+        session.commit()
 
 #
 # def parse_divisions():
