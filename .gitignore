@@ -28,3 +28,4 @@ __pycache__
 !assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
 !assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf
 !assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf
+!assets/CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf

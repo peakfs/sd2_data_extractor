@@ -1,94 +1,93 @@
 #! /usr/bin/python3
 from pathlib import Path
+from time import process_time
 
 from database.Ammunition import Ammunition
 from database.DamageRange import DamageRange
 from database.Weapon import Weapon
 from database.WeaponAmmunition import WeaponAmmunition
+from database.Unit import Unit
 from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
 from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
 from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
 from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
+from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
+from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
 
 APP_DIR = Path(__file__).parent
 
 
-def main():
-    create_schemas()
-    export_ammunition()
-    # export_divisions()
-    export_damage_range_tables()
-    export_weapons()
-
-
 def export_ammunition():
     parsed_ammunition = AmmunitionNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
-    ammunition_list = []
-
-    for name, export_data in parsed_ammunition.items():
-        if export_data['dmg_type_over_range_descriptor']:
-            export_data['dmg_type_over_range_descriptor'] = export_data['dmg_type_over_range_descriptor'].lstrip('~/')
-
-        ammunition_list.append(Ammunition(export_name=name, **export_data))
 
     with get_session() as session:
-        session.add_all(ammunition_list)
+        for name, export_data in parsed_ammunition.items():
+            if export_data['dmg_type_over_range_descriptor']:
+                export_data['dmg_type_over_range_descriptor'] = export_data['dmg_type_over_range_descriptor'].lstrip('~/')
+
+            session.add(Ammunition(export_name=name, **export_data))
+
         session.commit()
-
-
-# def export_divisions():
-#     parsed_divisions = DivisionsNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/Divisions.ndf')
-#     print(parsed_divisions)
 
 
 def export_damage_range_tables():
     parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
-    range_list = []
-
-    for name, export_data in parsed_damage_range_tables.items():
-
-        if 'ranges' not in export_data.keys():
-            continue
-
-        for rng, pen in export_data['ranges']:
-            range_list.append(
-                DamageRange(
-                    export_name=name,
-                    range_percentage=rng,
-                    penetration_percentage=pen
-                )
-            )
 
     with get_session() as session:
-        session.add_all(range_list)
+        for name, export_data in parsed_damage_range_tables.items():
+            if 'ranges' not in export_data.keys():
+                continue
+
+            for rng, pen in export_data['ranges']:
+                session.add(
+                    DamageRange(
+                        export_name=name,
+                        range_percentage=rng,
+                        penetration_percentage=pen
+                    )
+                )
+
         session.commit()
 
 
 def export_weapons():
     weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
-    weapon_list = []
-    pivot_list = []
-
-    for key, weapon_data in weapon_export_data.items():
-        weapon_list.append(Weapon(export_name=key))
-
-        plist = list(zip(weapon_data['salvos'], weapon_data['ammunition']))
-
-        for salvo, ammunition in plist:
-            pivot_list.append(
-                WeaponAmmunition(
-                    weapon_export_name=key,
-                    ammunition_export_name=ammunition,
-                    salvos=salvo
-                )
-            )
 
     with get_session() as session:
-        session.add_all(weapon_list)
-        session.add_all(pivot_list)
+        for key, weapon_data in weapon_export_data.items():
+            session.add(Weapon(export_name=key))
+
+            plist = list(zip(weapon_data['salvos'], weapon_data['ammunition']))
+
+            for salvo, ammunition in plist:
+                session.add(
+                    WeaponAmmunition(
+                        weapon_export_name=key,
+                        ammunition_export_name=ammunition,
+                        salvos=salvo
+                    )
+                )
         session.commit()
 
+
+def export_units():
+    unit_export_data = UniteNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
+
+    with get_session() as session:
+        for key, unit_data in unit_export_data.items():
+            session.add(Unit(export_name=key, **unit_data))
+
+        session.commit()
+
+
+def get_armor_types():
+    return ArmureTypeNdfProcessor().parse_file(APP_DIR / 'assets/CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
+
+
+# def export_divisions():
+#     parsed_divisions = DivisionsNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/Divisions.ndf')
+#     print(parsed_divisions)
 #
 # def parse_divisions():
 #     parser = DivisionParser()
@@ -109,35 +108,6 @@ def export_weapons():
 #     parse_file(APP_DIR / 'assets/GameData/Gameplay/Decks/DivisionCostMatrix.ndf', parser)
 #
 #     return parser.parsed_data
-#
-#
-# def parse_ammunition():
-#     parser = AmmunitionParser()
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf', parser)
-#
-#     return parser.parsed_data
-#
-#
-# def parse_weapons():
-#     parser = WeaponParser()
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf', parser)
-#
-#     return parser.parsed_data
-#
-#
-# def parse_range_tables():
-#     parser = DamageTypeOverRangeParser()
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf', parser)
-#
-#     return parser.parsed_data
-#
-#
-# def parse_units():
-#     parser = UnitParser()
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf', parser)
-#
-#     return parser.parsed_data
-#
 
 # def calculate_rof(raw_ammo):
 
@@ -158,13 +128,20 @@ def export_weapons():
 #     return rof
 
 
-if __name__ == '__main__':
-    # divisions = parse_divisions()
-    # decks = parse_decks(divisions)
-    # costs = parse_division_cost_matrices(divisions)
-    # ammo = parse_ammunition()
-    # weapons = parse_weapons()
-    # ranges = parse_range_tables()
-    # units = parse_units()
+def main():
+    tstart = process_time()
 
+    create_schemas()
+    # export_ammunition()
+    # export_divisions()
+    # export_damage_range_tables()
+    # export_weapons()
+    export_units()
+
+    tend = process_time()
+
+    print(f'Process ran for: {tend-tstart}(s)')
+
+
+if __name__ == '__main__':
     main()

@@ -25,7 +25,7 @@ class Handler(ABC):
 
     @abstractmethod
     def handle(self, matches: Match, storage: Any):
-        pass
+        raise NotImplementedError()
 
 
 class ExportParser(Handler):
@@ -59,7 +59,7 @@ class PropertyParser(Handler):
 
 class StringPropertyParser(PropertyParser):
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        pattern = fr'^\s*({field_name})\s*=\s*(.+)$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches, storage: BaseStorage):
@@ -71,12 +71,12 @@ class StringPropertyParser(PropertyParser):
 
         if matches.group(2) == 'nil':
             storage.data[storage.last_item][field_name] = None
-
-        if matches.group(2).startswith('~'):
+        elif matches.group(2).startswith('~'):
             storage.data[storage.last_item][field_name] = matches.group(2)
-
-        if matches.group(2).startswith('\'') or matches.group(2).startswith('"'):
+        elif matches.group(2).startswith('\'') or matches.group(2).startswith('"'):
             storage.data[storage.last_item][field_name] = matches.group(2).strip('\'').strip('"')
+        else:
+            storage.data[storage.last_item][field_name] = matches.group(2)
 
 
 class IntPropertyParser(PropertyParser):
@@ -141,7 +141,7 @@ class BoolPropertyParser(PropertyParser):
 
 class FormulaParser(PropertyParser):
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^({field_name})\s+=.+\((\d+)\).+$'
+        pattern = fr'^\s*({field_name})\s+=.+\((\d+|\d+.\d+)\).+$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches: Match, storage: BaseStorage):
@@ -161,12 +161,16 @@ class FormulaParser(PropertyParser):
 class TupleParser(Handler):
 
     field_name = None
+    parsed_field_name = None
 
-    def __init__(self, field_name: str):
-        pattern = r'\((\d+|\d+\.?\d+), (\d+|\d+\.?\d+)\),?'
+    def __init__(self, field_name: str, parsed_field_name: str = None):
+        pattern = r'\((\~\/?\w+|\d+|\d+\.?\d+), (\w+|\d+|\d+\.\d+)\),?'
 
         if field_name:
             self.field_name = field_name
+
+        if parsed_field_name:
+            self.parsed_field_name = parsed_field_name
 
         super().__init__(pattern)
 
@@ -174,18 +178,21 @@ class TupleParser(Handler):
         return matches.group(1), matches.group(2)
 
     def handle(self, matches: Match, storage: BaseStorage):
+        field_name = self.field_name
 
-        if self.field_name not in storage.data[storage.last_item].keys():
-            storage.data[storage.last_item][self.field_name] = []
-        else:
-            storage.data[storage.last_item][self.field_name].append(
-                self.parse_matches(matches)
-            )
+        if self.parsed_field_name:
+            field_name = self.parsed_field_name
+
+        storage.data[storage.last_item][field_name] = self.parse_matches(matches)
 
 
 class IntTupleParser(TupleParser):
     def parse_matches(self, matches: Match):
         return int(matches.group(1)), int(matches.group(2))
+
+class StringIntTupleParser(TupleParser):
+    def parse_matches(self, matches: Match):
+        return matches.group(1), int(matches.group(2))
 
 
 class FloatTupleParser(TupleParser):

@@ -1,22 +1,14 @@
-from parser.common import SkipLineError
-from parser.storage import BaseStorage
 import re
+
+from parser.storage import BaseStorage
 
 
 class NdfExportProcessor:
     handlers = []
-    _storage = None
+    storage = None
 
     def __init__(self, storage: BaseStorage):
         self.storage = storage
-
-    @property
-    def storage(self):
-        return self._storage
-
-    @storage.setter
-    def storage(self, storage: BaseStorage):
-        self._storage = storage
 
     def finalize(self):
         return self.storage.data
@@ -26,26 +18,18 @@ class NdfExportProcessor:
             raise FileNotFoundError
 
         with open(file, 'r') as infile:
-            for line in self._clean_lines(infile):
+            for line in infile:
+
+                line = line.strip()
+                if len(line) == 0 or line.startswith('//'):
+                    continue
+
                 for handler in self.handlers:
-                    try:
-                        matches = re.fullmatch(handler.pattern, line)
+                    matches = re.fullmatch(handler.pattern, line)
 
-                        if matches is None:
-                            raise SkipLineError()
-
-                        handler.handle(matches, self.storage)
-                    except SkipLineError:
+                    if matches is None:
                         continue
 
+                    handler.handle(matches, self.storage)
+
         return self.finalize()
-
-    @staticmethod
-    def _clean_lines(file) -> str:
-        for line in file:
-            line = line.strip()
-
-            if len(line) == 0 or line.startswith('//'):
-                continue
-
-            yield line
