@@ -5,12 +5,6 @@ from typing import Any, Match
 from .storage import BaseStorage
 
 METER = 0.2
-PARSE_PATTERN_PROPERTY = r'^(\w+)\s+=\s+(.+)$'
-PARSE_PATTERN_EXPORT = r'^export (\w+) is \w+$'
-
-
-class SkipLineError(TypeError):
-    pass
 
 
 class Handler(ABC):
@@ -29,8 +23,10 @@ class Handler(ABC):
 
 
 class ExportParser(Handler):
+    PATTERN = r'export (\w+).*'
+
     def __init__(self):
-        super().__init__(PARSE_PATTERN_EXPORT)
+        super().__init__(self.PATTERN)
 
     def handle(self, matches: Match, storage: BaseStorage):
         export_name = matches.group(1)
@@ -41,11 +37,12 @@ class ExportParser(Handler):
 class PropertyParser(Handler):
 
     parsed_field_name = None
+    PATTERN = r'^(\w+)\s+=\s+(.+)$'
 
     def __init__(self, pattern: str = None, parsed_field_name: str = None):
         self.parsed_field_name = parsed_field_name
         if not pattern:
-            pattern = PARSE_PATTERN_PROPERTY
+            pattern = self.PATTERN
 
         super().__init__(pattern)
 

@@ -6,6 +6,13 @@ from parser.storage import BaseStorage
 class NdfExportProcessor:
     handlers = []
     storage = None
+    garbage_lines = [
+        '(',
+        ')',
+        '[',
+        ']',
+        '),'
+    ]
 
     def __init__(self, storage: BaseStorage):
         self.storage = storage
@@ -21,7 +28,7 @@ class NdfExportProcessor:
             for line in infile:
 
                 line = line.strip()
-                if len(line) == 0 or line.startswith('//'):
+                if self.is_garbage_line(line):
                     continue
 
                 for handler in self.handlers:
@@ -31,5 +38,12 @@ class NdfExportProcessor:
                         continue
 
                     handler.handle(matches, self.storage)
+                    break
 
         return self.finalize()
+
+    def is_garbage_line(self, line: str) -> bool:
+        if len(line) == 0 or line.startswith('//') or line in self.garbage_lines:
+            return True
+        else:
+            return False
