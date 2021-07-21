@@ -22,3 +22,18 @@ class UnitWeaponParser(Handler):
 class CommandPointsCostParser(StringIntTupleParser):
     def parse_matches(self, matches: Match):
         return int(matches.group(2))
+
+
+class SpecialtyParser(Handler):
+    PATTERN = r'^\s*\'\b(Spec_\w+)\b\'.*$'
+    KEY = 'specialties'
+
+    def __init__(self):
+        super().__init__(self.PATTERN)
+
+    def handle(self, matches: Match, storage: BaseStorage):
+
+        if self.KEY not in storage.data[storage.last_item].keys():
+            storage.data[storage.last_item][self.KEY] = []
+
+        storage.data[storage.last_item][self.KEY].append(matches.group(1))

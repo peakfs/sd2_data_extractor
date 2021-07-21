@@ -21,11 +21,13 @@ __pycache__
 .pytest_cache
 
 # except the used assets
-!assets/GameData/Generated/Gameplay/Decks/Divisions.ndf
-!assets/GameData/Generated/Gameplay/Decks/DivisionRules.ndf
-!assets/GameData/Gameplay/Decks/DivisionCostMatrix.ndf
-!assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf
-!assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
-!assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf
-!assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf
-!assets/CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Decks/Divisions.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Decks/DivisionRules.ndf
+!assets/mod_location/GameData/Gameplay/Decks/DivisionCostMatrix.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Gfx/Ammunition.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf
+!assets/mod_location/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf
+!assets/mod_location/CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf
+!assets/mod_location/GameData/Generated/UserInterface/UnitSpecialties.ndf
+!assets/Utils/LocalisationEntries/Entries.csv

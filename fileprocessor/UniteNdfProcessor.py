@@ -1,6 +1,6 @@
 from .NdfExportProcessor import NdfExportProcessor
 from parser.storage import BaseStorage
-from parser.unit_fields import UnitWeaponParser, CommandPointsCostParser
+from parser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
 from parser.common import ExportParser,\
     FormulaParser, \
     StringPropertyParser, \
@@ -42,6 +42,7 @@ class UniteNdfProcessor(NdfExportProcessor):
             FormulaParser('PorteeVision', 'scope_range'),
             FormulaParser('PorteeVisionTBA', 'scope_range_tba'),
             FloatPropertyParser('SpeedBonusOnRoad', 'speed_bonus_on_road'),
+            SpecialtyParser(),
             IntPropertyParser('RealRoadSpeed', 'real_road_speed'),
             FormulaParser('StartTime', 'start_time'),
             FormulaParser('StopTime', 'stop_time'),

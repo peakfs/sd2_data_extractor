@@ -8,19 +8,23 @@ from database.DamageRange import DamageRange
 from database.Weapon import Weapon
 from database.WeaponAmmunition import WeaponAmmunition
 from database.Unit import Unit
+from database.Specialty import Specialty
+from database.UnitSpecialty import UnitSpecialty
 from database.base import create_schemas, get_session
+
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
 from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
 from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
 from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
 from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
+from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
 
-APP_DIR = Path(__file__).parent
+from config import MODFILES_DIR
 
 
 def export_ammunition():
-    parsed_ammunition = AmmunitionNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
+    parsed_ammunition = AmmunitionNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
 
     with get_session() as session:
         for name, export_data in parsed_ammunition.items():
@@ -33,7 +37,7 @@ def export_ammunition():
 
 
 def export_damage_range_tables():
-    parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
+    parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
 
     with get_session() as session:
         for name, export_data in parsed_damage_range_tables.items():
@@ -53,7 +57,7 @@ def export_damage_range_tables():
 
 
 def export_weapons():
-    weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
+    weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
 
     with get_session() as session:
         for key, weapon_data in weapon_export_data.items():
@@ -73,18 +77,33 @@ def export_weapons():
 
 
 def export_units():
-    unit_export_data = UniteNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
-    #unit_export_data = UniteNdfProcessor().parse_file(APP_DIR / 'assets/testunit.ndf')
+    unit_export_data = UniteNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
 
     with get_session() as session:
         for key, unit_data in unit_export_data.items():
+            specialties = unit_data.pop('specialties', None)
+
+            if specialties:
+                for spec in specialties:
+                    session.add(UnitSpecialty(unit_export_name=key, specialty_export_key=spec))
+
             session.add(Unit(export_name=key, **unit_data))
 
         session.commit()
 
 
+def export_unit_specialties():
+    specialty_export_data = UnitSpecialtiesNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/UserInterface/UnitSpecialties.ndf')
+
+    with get_session() as session:
+        for key, specialty_data in specialty_export_data.items():
+            session.add(Specialty(export_key=key, **specialty_data))
+
+        session.commit()
+
+
 def get_armor_types():
-    return ArmureTypeNdfProcessor().parse_file(APP_DIR / 'assets/CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
+    return ArmureTypeNdfProcessor().parse_file(MODFILES_DIR / 'CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
 
 
 # def export_divisions():
@@ -135,11 +154,14 @@ def main():
     tstart = process_time()
 
     create_schemas()
-    # export_ammunition()
-    # export_divisions()
-    # export_damage_range_tables()
-    # export_weapons()
+
+    export_unit_specialties()
     export_units()
+
+    export_ammunition()
+    # export_divisions()
+    export_damage_range_tables()
+    export_weapons()
 
     tend = process_time()
 
