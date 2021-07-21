@@ -1,4 +1,5 @@
 #! /usr/bin/python3
+import os
 from pathlib import Path
 from time import process_time
 
@@ -73,6 +74,7 @@ def export_weapons():
 
 def export_units():
     unit_export_data = UniteNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
+    #unit_export_data = UniteNdfProcessor().parse_file(APP_DIR / 'assets/testunit.ndf')
 
     with get_session() as session:
         for key, unit_data in unit_export_data.items():
@@ -129,6 +131,7 @@ def get_armor_types():
 
 
 def main():
+    os.remove('sd2.db')
     tstart = process_time()
 
     create_schemas()

@@ -34,11 +34,9 @@ class NdfExportProcessor:
                 for handler in self.handlers:
                     matches = re.fullmatch(handler.pattern, line)
 
-                    if matches is None:
-                        continue
-
-                    handler.handle(matches, self.storage)
-                    break
+                    if matches:
+                        handler.handle(matches, self.storage)
+                        break
 
         return self.finalize()
 

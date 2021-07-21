@@ -4,8 +4,6 @@ from typing import Any, Match
 
 from .storage import BaseStorage
 
-METER = 0.2
-
 
 class Handler(ABC):
     _pattern = None
@@ -23,7 +21,7 @@ class Handler(ABC):
 
 
 class ExportParser(Handler):
-    PATTERN = r'export (\w+).*'
+    PATTERN = r'export \b(\w+)\b.*'
 
     def __init__(self):
         super().__init__(self.PATTERN)
@@ -36,11 +34,14 @@ class ExportParser(Handler):
 
 class PropertyParser(Handler):
 
-    parsed_field_name = None
-    PATTERN = r'^(\w+)\s+=\s+(.+)$'
+    field_name = None
+    PATTERN = r'^\b(\w+)\b\s+=\s+(.+)$'
 
     def __init__(self, pattern: str = None, parsed_field_name: str = None):
-        self.parsed_field_name = parsed_field_name
+
+        if parsed_field_name:
+            self.field_name = parsed_field_name
+
         if not pattern:
             pattern = self.PATTERN
 
@@ -51,47 +52,40 @@ class PropertyParser(Handler):
         raise NotImplementedError('Parser not implemented!')
 
     def handle(self, matches: Match, storage: BaseStorage):
+
+        if not self.field_name:
+            self.field_name = matches.group(1)
+
         self.transform_property(matches, storage)
 
 
 class StringPropertyParser(PropertyParser):
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^\s*({field_name})\s*=\s*(.+)$'
+        pattern = fr'^\s*\b({field_name})\b\s*=\s*(.+)$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches, storage: BaseStorage):
 
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-        else:
-            field_name = matches.group(1)
-
         if matches.group(2) == 'nil':
-            storage.data[storage.last_item][field_name] = None
+            storage.data[storage.last_item][self.field_name] = None
         elif matches.group(2).startswith('~'):
-            storage.data[storage.last_item][field_name] = matches.group(2)
+            storage.data[storage.last_item][self.field_name] = matches.group(2)
         elif matches.group(2).startswith('\'') or matches.group(2).startswith('"'):
-            storage.data[storage.last_item][field_name] = matches.group(2).strip('\'').strip('"')
+            storage.data[storage.last_item][self.field_name] = matches.group(2).strip('\'').strip('"')
         else:
-            storage.data[storage.last_item][field_name] = matches.group(2)
+            storage.data[storage.last_item][self.field_name] = matches.group(2)
 
 
 class IntPropertyParser(PropertyParser):
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        pattern = fr'^\b({field_name})\b\s+=\s+(.+)$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches: Match, storage: BaseStorage):
-
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-        else:
-            field_name = matches.group(1)
-
         try:
             val = int(matches.group(2))
-            storage.data[storage.last_item][field_name] = val
+            storage.data[storage.last_item][self.field_name] = val
         except ValueError:
             pass
 
@@ -99,19 +93,13 @@ class IntPropertyParser(PropertyParser):
 class FloatPropertyParser(PropertyParser):
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        pattern = fr'^\b({field_name})\b\s+=\s+(.+)$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches: Match, storage: BaseStorage):
-
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-        else:
-            field_name = matches.group(1)
-
         try:
             val = float(matches.group(2))
-            storage.data[storage.last_item][field_name] = val
+            storage.data[storage.last_item][self.field_name] = val
         except ValueError:
             pass
 
@@ -119,55 +107,45 @@ class FloatPropertyParser(PropertyParser):
 class BoolPropertyParser(PropertyParser):
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^({field_name})\s+=\s+(.+)$'
+        pattern = fr'^\b({field_name})\b\s+=\s+(.+)$'
         super().__init__(pattern, parsed_field_name)
 
     def transform_property(self, matches: Match, storage: BaseStorage):
-
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-        else:
-            field_name = matches.group(1)
-
         try:
             val = bool(strtobool(matches.group(2)))
-            storage.data[storage.last_item][field_name] = val
+            storage.data[storage.last_item][self.field_name] = val
         except ValueError:
             pass
 
 
-class FormulaParser(PropertyParser):
+class FormulaParser(Handler):
+    field_name = None
+
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = fr'^\s*({field_name})\s+=.+\((\d+|\d+.\d+)\).+$'
-        super().__init__(pattern, parsed_field_name)
+        pattern = fr'^\s*\b({field_name})\b.*=.*?(\d+\.?\d*).*$'
 
-    def transform_property(self, matches: Match, storage: BaseStorage):
+        if parsed_field_name:
+            self.field_name = parsed_field_name
 
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-        else:
-            field_name = matches.group(1)
+        super().__init__(pattern)
 
+    def handle(self, matches: Match, storage: Any):
         try:
             val = int(matches.group(2))
-            storage.data[storage.last_item][field_name] = val
         except ValueError:
-            pass
+            val = float(matches.group(2))
+
+        storage.data[storage.last_item][self.field_name] = val
 
 
 class TupleParser(Handler):
-
     field_name = None
-    parsed_field_name = None
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = r'\((\~\/?\w+|\d+|\d+\.?\d+), (\w+|\d+|\d+\.\d+)\),?'
-
-        if field_name:
-            self.field_name = field_name
+        pattern = r'\((\~\/?\w+|\d+\.?\d*), (\w+|\d+\.?\d*)\),?'
 
         if parsed_field_name:
-            self.parsed_field_name = parsed_field_name
+            self.field_name = parsed_field_name
 
         super().__init__(pattern)
 
@@ -175,17 +153,13 @@ class TupleParser(Handler):
         return matches.group(1), matches.group(2)
 
     def handle(self, matches: Match, storage: BaseStorage):
-        field_name = self.field_name
-
-        if self.parsed_field_name:
-            field_name = self.parsed_field_name
-
-        storage.data[storage.last_item][field_name] = self.parse_matches(matches)
+        storage.data[storage.last_item][self.field_name] = self.parse_matches(matches)
 
 
 class IntTupleParser(TupleParser):
     def parse_matches(self, matches: Match):
         return int(matches.group(1)), int(matches.group(2))
+
 
 class StringIntTupleParser(TupleParser):
     def parse_matches(self, matches: Match):

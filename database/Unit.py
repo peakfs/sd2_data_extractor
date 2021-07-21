@@ -41,7 +41,7 @@ class Unit(Base):
     stop_time = Column(Integer)
     time_between_identify_rolls = Column(Numeric)
     is_towable = Column(Boolean)
-    plane_turn_radius = Column(Integer, nullable=True)
+    plane_turn_radius = Column(Integer, nullable=True, default='NULL')
     turn_start_time = Column(Integer)
     turn_stop_time = Column(Integer)
     vehicle_subtype = Column(String(50))
