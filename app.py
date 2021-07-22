@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 import os
-from pathlib import Path
+import csv
 from time import process_time
 
 from database.Ammunition import Ammunition
@@ -20,7 +20,9 @@ from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
 from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
 from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
 
-from config import MODFILES_DIR
+from config import MODFILES_DIR, ASSETS_DIR
+
+LOCALISATION_ENTRIES = {}
 
 
 def export_ammunition():
@@ -95,9 +97,17 @@ def export_units():
 def export_unit_specialties():
     specialty_export_data = UnitSpecialtiesNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/UserInterface/UnitSpecialties.ndf')
 
+    localisation = get_localisation_entries()
+
     with get_session() as session:
         for key, specialty_data in specialty_export_data.items():
-            session.add(Specialty(export_key=key, **specialty_data))
+            session.add(
+                Specialty(
+                    export_key=key,
+                    title=localisation[specialty_data['title']],
+                    description=localisation[specialty_data['description']]
+                )
+            )
 
         session.commit()
 
@@ -106,16 +116,22 @@ def get_armor_types():
     return ArmureTypeNdfProcessor().parse_file(MODFILES_DIR / 'CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
 
 
+def get_localisation_entries():
+    if len(LOCALISATION_ENTRIES) == 0:
+        with open(ASSETS_DIR / 'Utils/LocalisationEntries/Entries.csv', 'r') as locfile:
+            reader = csv.reader(locfile, delimiter=';')
+            for row in reader:
+                # row[2] = localisation token e.g. ASGNNLOKYC
+                # row[3] = localised name e.g. 0-ya Gv. Strelkovy Divizii
+                LOCALISATION_ENTRIES[row[2]] = row[3]
+
+    return LOCALISATION_ENTRIES
+
+
 # def export_divisions():
-#     parsed_divisions = DivisionsNdfProcessor().parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/Divisions.ndf')
+#     parsed_divisions = DivisionsNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/Divisions.ndf')
 #     print(parsed_divisions)
-#
-# def parse_divisions():
-#     parser = DivisionParser()
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/Divisions.ndf', parser)
-#
-#     return parser.parsed_data
-#
+
 #
 # def parse_decks(parsed_divisions):
 #     parser = DivisionRulesParser(parsed_divisions)
@@ -130,10 +146,9 @@ def get_armor_types():
 #
 #     return parser.parsed_data
 
+
 # def calculate_rof(raw_ammo):
-
 #     burst_length = (raw_ammo['shot_per_burst'] - 1.0) * raw_ammo['time_between_shots']
-
 #     rof = (
 #               60 / (
 #                   burst_length + raw_ammo['time_between_bursts']

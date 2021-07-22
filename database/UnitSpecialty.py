@@ -9,4 +9,3 @@ class UnitSpecialty(Base):
 
     unit_export_name = Column(String(100))
     specialty_export_key = Column(String(100))
-
