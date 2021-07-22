@@ -8,7 +8,7 @@ class Unit(Base):
     id = Column(Integer, primary_key=True)
 
     export_name = Column(String(100))
-
+    name = Column(String(100), nullable=True)
     acceleration_max = Column(Numeric)
     armor_back = Column(String(50))
     armor_front = Column(String(50))

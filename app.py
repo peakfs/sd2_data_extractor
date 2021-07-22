@@ -81,8 +81,16 @@ def export_weapons():
 def export_units():
     unit_export_data = UniteNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
 
+    localisation = get_localisation_entries()
+
     with get_session() as session:
         for key, unit_data in unit_export_data.items():
+
+            try:
+                unit_data['name'] = localisation[unit_data['localisation_key']]
+            except KeyError:
+                unit_data['name'] = None
+
             specialties = unit_data.pop('specialties', None)
 
             if specialties:
