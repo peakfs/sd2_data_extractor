@@ -169,3 +169,46 @@ class StringIntTupleParser(TupleParser):
 class FloatTupleParser(TupleParser):
     def parse_matches(self, matches: Match):
         return float(matches.group(1)), float(matches.group(2))
+
+
+class ListParser(Handler):
+
+    def __init__(self, field_name: str, parsed_field_name: str = None):
+        pattern = fr'^\s*\b({field_name})\b\s?=\s?\[(.+)\].*$'
+        super().__init__(pattern)
+
+        self.field_name = field_name
+
+        if parsed_field_name:
+            self.field_name = parsed_field_name
+
+    def handle(self, matches: Match, storage: Any):
+        storage.data[storage.last_item][self.field_name] = matches.group(2)
+
+
+class DescriptorListParser(ListParser):
+    def handle(self, matches: Match, storage: Any):
+        storage.data[storage.last_item][self.field_name] = []
+
+        for descriptor in matches.group(2).split(','):
+            storage.data[storage.last_item][self.field_name].append(descriptor.strip().lstrip('~/'))
+
+
+class IntListParser(ListParser):
+    def handle(self, matches: Match, storage: Any):
+        storage.data[storage.last_item][self.field_name] = []
+
+        for descriptor in matches.group(2).split(','):
+            storage.data[storage.last_item][self.field_name].append(
+                int(descriptor.strip())
+            )
+
+
+class FloatListParser(ListParser):
+    def handle(self, matches: Match, storage: Any):
+        storage.data[storage.last_item][self.field_name] = []
+
+        for descriptor in matches.group(2).split(','):
+            storage.data[storage.last_item][self.field_name].append(
+                float(descriptor.strip())
+            )

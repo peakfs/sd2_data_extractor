@@ -1,26 +1,30 @@
 #! /usr/bin/python3
-import os
 import csv
+import os
 from time import process_time
 
+from config import ASSETS_DIR, MODFILES_DIR
 from database.Ammunition import Ammunition
 from database.DamageRange import DamageRange
+from database.Deck import Deck
+from database.DeckUnit import DeckUnit
+from database.Division import Division
+from database.DivisionDeck import DivisionDeck
+from database.Specialty import Specialty
+from database.Unit import Unit
+from database.UnitSpecialty import UnitSpecialty
+from database.UnitTransport import UnitTransport
 from database.Weapon import Weapon
 from database.WeaponAmmunition import WeaponAmmunition
-from database.Unit import Unit
-from database.Specialty import Specialty
-from database.UnitSpecialty import UnitSpecialty
 from database.base import create_schemas, get_session
-
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
-from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
-from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
-from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
-from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
+from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
+from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
+from fileprocessor.DivisonRulesNdfProcessor import DivisionRulesNdfProcessor
 from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
-
-from config import MODFILES_DIR, ASSETS_DIR
+from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
+from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 
 LOCALISATION_ENTRIES = {}
 
@@ -120,6 +124,44 @@ def export_unit_specialties():
         session.commit()
 
 
+def export_decks():
+    deck_export_data = DivisionRulesNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/DivisionRules.ndf')
+
+    with get_session() as session:
+
+        for deck, deck_data in deck_export_data.items():
+
+            if not deck_data:
+                continue
+
+            session.add(Deck(export_name=deck))
+            session.add(
+                DeckUnit(
+                    deck_export_name=deck,
+                    unit_export_name=deck_data['unit_export_name'],
+                    is_available_without_transport=deck_data['is_available_without_transport'],
+                    max_cards=deck_data['max_cards'],
+                    units_phase_a=deck_data['number_of_units'][0],
+                    units_phase_b=deck_data['number_of_units'][1],
+                    units_phase_c=deck_data['number_of_units'][2],
+                    vet_multiplier_phase_a=deck_data['unit_count_exp_multiplier'][0],
+                    vet_multiplier_phase_b=deck_data['unit_count_exp_multiplier'][1],
+                    vet_multiplier_phase_c=deck_data['unit_count_exp_multiplier'][2]
+                )
+            )
+
+            if 'available_transports' in deck_data.keys():
+                for transport in deck_data['available_transports']:
+                    session.add(
+                        UnitTransport(
+                            unit_export_name=deck_data['unit_export_name'],
+                            unit_transport_name=transport
+                        )
+                    )
+
+        session.commit()
+
+
 def get_armor_types():
     return ArmureTypeNdfProcessor().parse_file(MODFILES_DIR / 'CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
 
@@ -136,18 +178,51 @@ def get_localisation_entries():
     return LOCALISATION_ENTRIES
 
 
-# def export_divisions():
-#     parsed_divisions = DivisionsNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/Divisions.ndf')
-#     print(parsed_divisions)
+def export_divisions():
+    parsed_divisions = DivisionsNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/Divisions.ndf')
+    localisation = get_localisation_entries()
 
-#
-# def parse_decks(parsed_divisions):
-#     parser = DivisionRulesParser(parsed_divisions)
-#     parse_file(APP_DIR / 'assets/GameData/Generated/Gameplay/Decks/DivisionRules.ndf', parser)
-#
-#     return parser.parsed_data
-#
-#
+    with get_session() as session:
+
+        for division, division_data in parsed_divisions.items():
+            if division_data['division_type'] not in DivisionsNdfProcessor.TYPE_CLASSIFICATION_MAP:
+                continue
+
+            if 'decks' in division_data.keys():
+                for deck in division_data['decks']:
+                    session.add(
+                        DivisionDeck(
+                            division_export_name=division,
+                            deck_export_name=deck
+                        )
+                    )
+
+            name = division_data['name']
+            description = division_data['description']
+            pwr_classification = DivisionsNdfProcessor.POWER_CLASSIFICATION_MAP[division_data['power_classification']]
+            type_classification = DivisionsNdfProcessor.TYPE_CLASSIFICATION_MAP[division_data['division_type']]
+
+            if division_data['name'] in localisation:
+                name = localisation[division_data['name']]
+
+            if division_data['description'] in localisation:
+                description = localisation[division_data['description']]
+
+            session.add(
+                Division(
+                    export_name=division,
+                    name=name,
+                    description=description,
+                    nationality=division_data['nationality'],
+                    max_activation_points=division_data['max_activation_points'],
+                    country=division_data['country'],
+                    power_classification=pwr_classification,
+                    division_type=type_classification
+                )
+            )
+
+        session.commit()
+
 # def parse_division_cost_matrices(parsed_divisions):
 #     parser = DivisionCostMatrixParser(parsed_divisions)
 #     parse_file(APP_DIR / 'assets/GameData/Gameplay/Decks/DivisionCostMatrix.ndf', parser)
@@ -180,11 +255,11 @@ def main():
 
     export_unit_specialties()
     export_units()
-
     export_ammunition()
-    # export_divisions()
+    export_divisions()
     export_damage_range_tables()
     export_weapons()
+    export_decks()
 
     tend = process_time()
 
