@@ -247,22 +247,6 @@ def export_division_cost_matrices():
 
         session.commit()
 
-# def calculate_rof(raw_ammo):
-#     burst_length = (raw_ammo['shot_per_burst'] - 1.0) * raw_ammo['time_between_shots']
-#     rof = (
-#               60 / (
-#                   burst_length + raw_ammo['time_between_bursts']
-#                 )
-#           ) * raw_ammo['shot_per_burst']
-
-#     if raw_ammo['category'] == 'rifle' or raw_ammo['category'] == 'law':
-#         rof = rof * raw_ammo['amount']
-
-#     if raw_ammo['category'] in ['lmg', 'mmg', 'smg', 'hmg']:
-#         rof = rof * raw_ammo['supply_used_per_burst'] * 0.5
-
-#     return rof
-
 
 def main():
     os.remove('sd2.db')
