@@ -21,7 +21,7 @@ class Handler(ABC):
 
 
 class ExportParser(Handler):
-    PATTERN = r'export \b(\w+)\b.*'
+    PATTERN = r'^.*export \b(.+)\b\sis\s.*$'
 
     def __init__(self):
         super().__init__(self.PATTERN)
@@ -142,7 +142,7 @@ class TupleParser(Handler):
     field_name = None
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
-        pattern = r'\((\~\/?\w+|\d+\.?\d*), (\w+|\d+\.?\d*)\),?'
+        pattern = r'^\s*\((\~\/?\w+|\d+\.?\d*),\s(\w+|\d+\.?\d*)\),?$'
 
         if parsed_field_name:
             self.field_name = parsed_field_name
@@ -153,6 +153,9 @@ class TupleParser(Handler):
         return matches.group(1), matches.group(2)
 
     def handle(self, matches: Match, storage: BaseStorage):
+        if not self.field_name:
+            self.field_name = storage.last_item
+
         storage.data[storage.last_item][self.field_name] = self.parse_matches(matches)
 
 

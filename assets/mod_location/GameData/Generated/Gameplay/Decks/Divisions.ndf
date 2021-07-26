@@ -25232,7 +25232,7 @@ export Descriptor_Deck_Division_NZ_2nd_NZ_multi is TDeckDivisionDescriptor
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Baltimore_Mk_V_x4_227_GRE, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Barbed_Wire, 1),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_UK, 1),
-        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_x8_150mm_AP_UK, 2),
+        (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Beaufighter_Mk_X_x8_150mm_HE_UK, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Bunker_AT_6pdr_NZ, 2),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Bunker_MG_NZ, 4),
         (~/Descriptor_Deck_Pack_TOE_NZ_2nd_NZ_multi_Canon_17pdr_NZ, 3),

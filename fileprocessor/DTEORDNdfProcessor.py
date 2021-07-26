@@ -10,5 +10,5 @@ class DTEORDNdfProcessor(NdfExportProcessor):
 
         self.handlers = [
             ExportParser(),
-            FloatTupleParser('ranges')
+            FloatTupleParser('ranges', 'ranges')
         ]

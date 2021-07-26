@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 import csv
-import os
 from time import process_time
 
 from config import ASSETS_DIR, MODFILES_DIR
@@ -15,7 +14,6 @@ from database.Specialty import Specialty
 from database.Unit import Unit
 from database.UnitSpecialty import UnitSpecialty
 from database.UnitTransport import UnitTransport
-from database.Weapon import Weapon
 from database.WeaponAmmunition import WeaponAmmunition
 from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
@@ -52,14 +50,13 @@ def export_damage_range_tables():
             if 'ranges' not in export_data.keys():
                 continue
 
-            for rng, pen in export_data['ranges']:
-                session.add(
-                    DamageRange(
-                        export_name=name,
-                        range_percentage=rng,
-                        penetration_percentage=pen
-                    )
+            session.add(
+                DamageRange(
+                    export_name=name,
+                    range_percentage=export_data['ranges'][0],
+                    penetration_percentage=export_data['ranges'][1]
                 )
+            )
 
         session.commit()
 
@@ -69,8 +66,6 @@ def export_weapons():
 
     with get_session() as session:
         for key, weapon_data in weapon_export_data.items():
-            session.add(Weapon(export_name=key))
-
             plist = list(zip(weapon_data['salvos'], weapon_data['ammunition']))
 
             for salvo, ammunition in plist:
@@ -249,7 +244,6 @@ def export_division_cost_matrices():
 
 
 def main():
-    os.remove('sd2.db')
     tstart = process_time()
 
     create_schemas()

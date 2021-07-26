@@ -3894,7 +3894,7 @@ private DivisionRules is TDeckDivisionRules
                         AvailableWithoutTransport = True
                         AvailableTransportList = [~/Descriptor_Unit_Truck_GMC_FR]
                         MaxPackNumber = 1
-                        NumberOfUnitInPackByPhase = [9, 15, 0]
+                        NumberOfUnitInPackByPhase = [5, 10, 15]
                         NumberOfUnitInPackXPMultiplier = [0.0, 0.0, 1.0]
                     ),
                     TDeckUniteRule
@@ -4386,7 +4386,7 @@ private DivisionRules is TDeckDivisionRules
                         AvailableWithoutTransport = True
                         AvailableTransportList = []
                         MaxPackNumber = 2
-                        NumberOfUnitInPackByPhase = [8, 16, 0]
+                        NumberOfUnitInPackByPhase = [6, 12, 16]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.74, 0.49]
                     ),
                     TDeckUniteRule
@@ -13149,7 +13149,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_PzGrenadier_Faust_GR
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Kfz_70, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_251_1, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_U304]
+                        AvailableTransportList = [~/Descriptor_Unit_Kfz_70, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_251_1, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_U304]
                         MaxPackNumber = 3
                         NumberOfUnitInPackByPhase = [6, 12, 18]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.66, 0.33]
@@ -13185,7 +13185,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_PzPionier_GR
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Kfz_70, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_251_1, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_U304]
+                        AvailableTransportList = [~/Descriptor_Unit_Kfz_70, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_SdKfz_10, ~/Descriptor_Unit_SdKfz_251_1, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_U304]
                         MaxPackNumber = 2
                         NumberOfUnitInPackByPhase = [5, 10, 15]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.8, 0.6]
@@ -14599,7 +14599,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_Mortier_80mm_Jager_GER
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Horch_108_GER, ~/Descriptor_Unit_Kubelwagen, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Schwimmwagen, ~/Descriptor_Unit_SdKfz_3_Maultier, ~/Descriptor_Unit_SdKfz_3_Maultier, ~/Descriptor_Unit_SdKfz_7, ~/Descriptor_Unit_SdKfz_7]
+                        AvailableTransportList = [~/Descriptor_Unit_Horch_108_GER, ~/Descriptor_Unit_Kubelwagen, ~/Descriptor_Unit_Opel_Blitz, ~/Descriptor_Unit_Schwimmwagen, ~/Descriptor_Unit_SdKfz_3_Maultier, ~/Descriptor_Unit_SdKfz_7]
                         MaxPackNumber = 4
                         NumberOfUnitInPackByPhase = [4, 8, 12]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.75, 0.5]
@@ -28178,7 +28178,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_Flak_38_20mm
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_Vickers_Utility_Tractor_GER]
+                        AvailableTransportList = [~/Descriptor_Unit_Kubelwagen, ~/Descriptor_Unit_Peugeot_DMA, ~/Descriptor_Unit_Ttruck_Laffly_S35T_GER, ~/Descriptor_Unit_Vickers_Utility_Tractor_GER]
                         MaxPackNumber = 2
                         NumberOfUnitInPackByPhase = [6, 9, 12]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.67, 0.33]
@@ -29917,7 +29917,7 @@ private DivisionRules is TDeckDivisionRules
                     ),
                     TDeckUniteRule
                     (
-                        UnitDescriptor = ~/Descriptor_Unit_Beaufighter_Mk_X_x8_150mm_AP_UK
+                        UnitDescriptor = ~/Descriptor_Unit_Beaufighter_Mk_X_x8_150mm_HE_UK
                         AvailableWithoutTransport = True
                         AvailableTransportList = []
                         MaxPackNumber = 2
@@ -45716,7 +45716,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_Tankodesantniki_CMD_SOV
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M2_30_SOV, ~/Descriptor_Unit_Halftrack_M5_50_SOV, ~/Descriptor_Unit_Truck_Studebaker_SOV, ~/Descriptor_Unit_Truck_Studebaker_SOV, ~/Descriptor_Unit_Truck_WC52_SOV]
+                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M2_30_SOV, ~/Descriptor_Unit_Halftrack_M5_50_SOV, ~/Descriptor_Unit_Truck_Studebaker_SOV, ~/Descriptor_Unit_Truck_WC52_SOV]
                         MaxPackNumber = 1
                         NumberOfUnitInPackByPhase = [3, 6, 0]
                         NumberOfUnitInPackXPMultiplier = [0.0, 1.0, 0.66]
@@ -53724,7 +53724,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_Artilleur_SOV
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M2_30_SOV, ~/Descriptor_Unit_Halftrack_ZIS_42_SOV, ~/Descriptor_Unit_Halftrack_ZIS_42_SOV, ~/Descriptor_Unit_Jeep_SOV, ~/Descriptor_Unit_SideCar_HarleyD_SOV, ~/Descriptor_Unit_Truck_Studebaker_SOV, ~/Descriptor_Unit_Truck_WC52_DSHK_SOV]
+                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M2_30_SOV, ~/Descriptor_Unit_Halftrack_ZIS_42_SOV, ~/Descriptor_Unit_Jeep_SOV, ~/Descriptor_Unit_SideCar_HarleyD_SOV, ~/Descriptor_Unit_Truck_Studebaker_SOV, ~/Descriptor_Unit_Truck_WC52_DSHK_SOV]
                         MaxPackNumber = 2
                         NumberOfUnitInPackByPhase = [3, 6, 9]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.67, 0.33]
@@ -58840,7 +58840,7 @@ private DivisionRules is TDeckDivisionRules
                     (
                         UnitDescriptor = ~/Descriptor_Unit_Canon_76mm_US
                         AvailableWithoutTransport = True
-                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M3A1_30_US, ~/Descriptor_Unit_Halftrack_M3A1_30_US, ~/Descriptor_Unit_Truck_GMC_US]
+                        AvailableTransportList = [~/Descriptor_Unit_Halftrack_M3A1_30_US, ~/Descriptor_Unit_Truck_GMC_US]
                         MaxPackNumber = 1
                         NumberOfUnitInPackByPhase = [2, 4, 6]
                         NumberOfUnitInPackXPMultiplier = [1.0, 0.49, 0.24]
