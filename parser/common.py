@@ -1,6 +1,6 @@
-from distutils.util import strtobool
 from abc import ABC, abstractmethod
-from typing import Any, Match
+from distutils.util import strtobool
+from typing import Match
 
 from .storage import BaseStorage
 
@@ -16,7 +16,7 @@ class Handler(ABC):
         return self._pattern
 
     @abstractmethod
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         raise NotImplementedError()
 
 
@@ -129,7 +129,7 @@ class FormulaParser(Handler):
 
         super().__init__(pattern)
 
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         try:
             val = int(matches.group(2))
         except ValueError:
@@ -182,12 +182,12 @@ class ListParser(Handler):
         if parsed_field_name:
             self.field_name = parsed_field_name
 
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         storage.data[storage.last_item][self.field_name] = matches.group(2)
 
 
 class DescriptorListParser(ListParser):
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         storage.data[storage.last_item][self.field_name] = []
 
         for descriptor in matches.group(2).split(','):
@@ -195,7 +195,7 @@ class DescriptorListParser(ListParser):
 
 
 class IntListParser(ListParser):
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         storage.data[storage.last_item][self.field_name] = []
 
         for descriptor in matches.group(2).split(','):
@@ -205,7 +205,7 @@ class IntListParser(ListParser):
 
 
 class FloatListParser(ListParser):
-    def handle(self, matches: Match, storage: Any):
+    def handle(self, matches: Match, storage: BaseStorage):
         storage.data[storage.last_item][self.field_name] = []
 
         for descriptor in matches.group(2).split(','):

@@ -5,6 +5,7 @@ from time import process_time
 
 from config import ASSETS_DIR, MODFILES_DIR
 from database.Ammunition import Ammunition
+from database.CostMatrix import CostMatrix
 from database.DamageRange import DamageRange
 from database.Deck import Deck
 from database.DeckUnit import DeckUnit
@@ -20,6 +21,7 @@ from database.base import create_schemas, get_session
 from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
 from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
 from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
+from fileprocessor.DivisionCostMatrixNdfProcessor import DivisionCostMatrixNdfProcessor
 from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
 from fileprocessor.DivisonRulesNdfProcessor import DivisionRulesNdfProcessor
 from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
@@ -215,6 +217,7 @@ def export_divisions():
                     description=description,
                     nationality=division_data['nationality'],
                     max_activation_points=division_data['max_activation_points'],
+                    cost_matrix_name=division_data['cost_matrix_name'],
                     country=division_data['country'],
                     power_classification=pwr_classification,
                     division_type=type_classification
@@ -223,12 +226,26 @@ def export_divisions():
 
         session.commit()
 
-# def parse_division_cost_matrices(parsed_divisions):
-#     parser = DivisionCostMatrixParser(parsed_divisions)
-#     parse_file(APP_DIR / 'assets/GameData/Gameplay/Decks/DivisionCostMatrix.ndf', parser)
-#
-#     return parser.parsed_data
 
+def export_division_cost_matrices():
+    cost_matrix_data = DivisionCostMatrixNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Gameplay/Decks/DivisionCostMatrix.ndf')
+
+    with get_session() as session:
+        for matrix_name, cost_data in cost_matrix_data.items():
+            if matrix_name == 'MatrixCostName_Default':
+                continue
+
+            for category_name, cost_values in cost_data.items():
+                for cost in cost_values:
+                    session.add(
+                        CostMatrix(
+                            export_name=matrix_name,
+                            unit_category_name=DivisionCostMatrixNdfProcessor.CATEGORY_NAME_MAP[category_name],
+                            cost=cost
+                        )
+                    )
+
+        session.commit()
 
 # def calculate_rof(raw_ammo):
 #     burst_length = (raw_ammo['shot_per_burst'] - 1.0) * raw_ammo['time_between_shots']
@@ -257,6 +274,7 @@ def main():
     export_units()
     export_ammunition()
     export_divisions()
+    export_division_cost_matrices()
     export_damage_range_tables()
     export_weapons()
     export_decks()

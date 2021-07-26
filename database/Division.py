@@ -14,5 +14,6 @@ class Division(Base):
     nationality = Column(String(100))
     power_classification = Column(String(1), nullable=True)
     max_activation_points = Column(Integer)
+    cost_matrix_name = Column(String(100))
     country = Column(String(10))
     division_type = Column(String(50))

@@ -29,6 +29,7 @@ class DivisionsNdfProcessor(NdfExportProcessor):
             ListParser('DivisionTags', 'tags'),
             DeckParser('decks'),
             IntPropertyParser('MaxActivationPoints', 'max_activation_points'),
+            StringPropertyParser('CostMatrix', 'cost_matrix_name'),
             StringPropertyParser('CountryId', 'country'),
             StringPropertyParser('TypeTexture', 'division_type'),
         ]
