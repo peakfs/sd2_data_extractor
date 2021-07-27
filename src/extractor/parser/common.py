@@ -6,6 +6,7 @@ from .storage import BaseStorage
 
 
 class Handler(ABC):
+    """Base class that provides the base for line parser methods."""
     _pattern = None
 
     def __init__(self, pattern=None):
@@ -13,10 +14,21 @@ class Handler(ABC):
 
     @property
     def pattern(self) -> str:
+        """
+        The pattern that will be matched against the actual line from
+        the processed file.
+
+        :return pattern: The pattern that will be used in line matching.
+        :type pattern: string
+        """
         return self._pattern
 
     @abstractmethod
     def handle(self, matches: Match, storage: BaseStorage):
+        """
+        This method will run after a successful pattern match against
+        the actual line.
+        """
         raise NotImplementedError()
 
 
