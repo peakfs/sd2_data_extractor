@@ -1,6 +1,6 @@
-from parser.common import ExportParser, IntPropertyParser, ListParser, StringPropertyParser
-from parser.division_fields import DeckParser
-from parser.storage import BaseStorage
+from lineparser.common import ExportParser, IntPropertyParser, ListParser, StringPropertyParser
+from lineparser.division_fields import DeckParser
+from lineparser.storage import BaseStorage
 from .NdfExportProcessor import NdfExportProcessor
 
 

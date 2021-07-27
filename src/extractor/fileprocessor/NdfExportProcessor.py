@@ -1,6 +1,6 @@
 import re
 
-from parser.storage import BaseStorage
+from lineparser.storage import BaseStorage
 
 
 class NdfExportProcessor:

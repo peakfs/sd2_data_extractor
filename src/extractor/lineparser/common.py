@@ -1,3 +1,6 @@
+"""
+Contains data parsing classes that are commonly used in fileprocessors.
+"""
 from abc import ABC, abstractmethod
 from distutils.util import strtobool
 from typing import Match
@@ -6,7 +9,7 @@ from .storage import BaseStorage
 
 
 class Handler(ABC):
-    """Base class that provides the base for line parser methods."""
+    """Base class that provides the base for line lineparser methods."""
     _pattern = None
 
     def __init__(self, pattern=None):
@@ -29,7 +32,6 @@ class Handler(ABC):
         This method will run after a successful pattern match against
         the actual line.
         """
-        raise NotImplementedError()
 
 
 class ExportParser(Handler):

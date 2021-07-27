@@ -1,7 +1,7 @@
 from .NdfExportProcessor import NdfExportProcessor
-from parser.storage import BaseStorage
-from parser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
-from parser.common import ExportParser,\
+from lineparser.storage import BaseStorage
+from lineparser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
+from lineparser.common import ExportParser,\
     FormulaParser, \
     StringPropertyParser, \
     FloatPropertyParser, \

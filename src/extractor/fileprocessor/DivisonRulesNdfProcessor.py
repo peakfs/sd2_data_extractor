@@ -1,7 +1,7 @@
-from parser.storage import BaseStorage
+from lineparser.storage import BaseStorage
 from .NdfExportProcessor import NdfExportProcessor
-from parser.divisionrules_fields import DivisionParser, ReferencePropertyParser
-from parser.common import StringPropertyParser, \
+from lineparser.divisionrules_fields import DivisionParser, ReferencePropertyParser
+from lineparser.common import StringPropertyParser, \
     BoolPropertyParser, \
     IntPropertyParser, \
     DescriptorListParser, \

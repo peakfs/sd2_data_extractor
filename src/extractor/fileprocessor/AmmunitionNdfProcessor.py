@@ -1,8 +1,8 @@
-from parser.storage import BaseStorage
+from lineparser.storage import BaseStorage
 from .NdfExportProcessor import NdfExportProcessor
 from database.Ammunition import Ammunition
-from parser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
-from parser.common import ExportParser, \
+from lineparser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
+from lineparser.common import ExportParser, \
     StringPropertyParser, \
     FloatPropertyParser, \
     FormulaParser, \

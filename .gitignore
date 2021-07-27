@@ -16,10 +16,16 @@
 *.prof
 *.db
 
+# virtualenv
 venv
+
+# cache
 __pycache__
 .pytest_cache
+
+# code coverage data
 .coverage
+coverage
 
 # except
 !pytest.ini

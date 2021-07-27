@@ -1,6 +1,6 @@
 from .NdfExportProcessor import NdfExportProcessor
-from parser.storage import BaseStorage
-from parser.armortype_fields import ArmorTypeParser
+from lineparser.storage import BaseStorage
+from lineparser.armortype_fields import ArmorTypeParser
 
 
 class ArmureTypeNdfProcessor(NdfExportProcessor):
