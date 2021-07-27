@@ -21,7 +21,9 @@ __pycache__
 .pytest_cache
 .coverage
 
-# except the used assets
+# except
+!pytest.ini
+
 !assets/mod_location/GameData/Generated/Gameplay/Decks/Divisions.ndf
 !assets/mod_location/GameData/Generated/Gameplay/Decks/DivisionRules.ndf
 !assets/mod_location/GameData/Gameplay/Decks/DivisionCostMatrix.ndf
