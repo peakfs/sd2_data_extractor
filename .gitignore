@@ -19,6 +19,7 @@
 venv
 __pycache__
 .pytest_cache
+.coverage
 
 # except the used assets
 !assets/mod_location/GameData/Generated/Gameplay/Decks/Divisions.ndf

@@ -12,7 +12,7 @@ class Handler(ABC):
         self._pattern = pattern
 
     @property
-    def pattern(self):
+    def pattern(self) -> str:
         return self._pattern
 
     @abstractmethod
