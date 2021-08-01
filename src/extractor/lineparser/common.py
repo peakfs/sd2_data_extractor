@@ -35,6 +35,12 @@ class Handler(ABC):
 
 
 class ExportParser(Handler):
+    """
+    Class that parses every line that matches the provided pattern.
+
+    From the matched lines we will store the matched value as the last
+    item in the storage.
+    """
     PATTERN = r'^.*export \b(.+)\b\sis\s.*$'
 
     def __init__(self):
@@ -47,6 +53,15 @@ class ExportParser(Handler):
 
 
 class PropertyParser(Handler):
+    """
+    Class that parsers property like lines.
+
+    From the matched line we will store the property name and the
+    property value.
+
+    We define the `transform_property` method so we can transform the
+    matched value types to whatever we would like.
+    """
 
     field_name = None
     PATTERN = r'^\b(\w+)\b\s+=\s+(.+)$'
@@ -157,6 +172,8 @@ class TupleParser(Handler):
 
     def __init__(self, field_name: str, parsed_field_name: str = None):
         pattern = r'^\s*\((\~\/?\w+|\d+\.?\d*),\s(\w+|\d+\.?\d*)\),?$'
+
+        self.field_name = field_name
 
         if parsed_field_name:
             self.field_name = parsed_field_name
