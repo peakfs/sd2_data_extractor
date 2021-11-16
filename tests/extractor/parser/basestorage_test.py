@@ -1,5 +1,5 @@
 import pytest
-from src.extractor.lineparser.storage import BaseStorage
+from extractor.lineparser.storage import BaseStorage
 
 
 class TestBaseStorage:

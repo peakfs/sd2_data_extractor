@@ -1,8 +1,8 @@
 import pytest
 import re
 
-from src.extractor.lineparser.common import ExportParser
-from src.extractor.lineparser.storage import BaseStorage
+from extractor.lineparser.common import ExportParser
+from extractor.lineparser.storage import BaseStorage
 
 
 lines_provider = [
@@ -26,6 +26,12 @@ def storage():
     return BaseStorage()
 
 class TestExportParser:
+
+    def test_sets_pattern(self, parser):
+        expected = ExportParser.PATTERN
+        actual = parser.pattern
+
+        assert expected == actual
 
     @pytest.mark.parametrize('line, expected', lines_provider)
     def test_matches_line(self, parser, line, expected):

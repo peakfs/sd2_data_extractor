@@ -2,7 +2,6 @@
 import csv
 from time import process_time
 
-from config import ASSETS_DIR, MODFILES_DIR
 from database.Ammunition import Ammunition
 from database.CostMatrix import CostMatrix
 from database.DamageRange import DamageRange
@@ -26,16 +25,21 @@ from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcesso
 from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
 from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 
+from config import ASSETS_DIR, MODFILES_DIR
+
 LOCALISATION_ENTRIES = {}
 
-
 def export_ammunition():
-    parsed_ammunition = AmmunitionNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/Ammunition.ndf')
+    parsed_ammunition = AmmunitionNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/Ammunition.ndf'
+    )
 
     with get_session() as session:
         for name, export_data in parsed_ammunition.items():
-            if export_data['dmg_type_over_range_descriptor']:
-                export_data['dmg_type_over_range_descriptor'] = export_data['dmg_type_over_range_descriptor'].lstrip('~/')
+
+            descriptor = export_data['dmg_type_over_range_descriptor']
+            if descriptor:
+                descriptor = descriptor.lstrip('~/')
 
             session.add(Ammunition(export_name=name, **export_data))
 
@@ -43,7 +47,9 @@ def export_ammunition():
 
 
 def export_damage_range_tables():
-    parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf')
+    parsed_damage_range_tables = DTEORDNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/DamageTypeEvolutionOverRangeDescriptor.ndf'
+    )
 
     with get_session() as session:
         for name, export_data in parsed_damage_range_tables.items():
@@ -62,7 +68,9 @@ def export_damage_range_tables():
 
 
 def export_weapons():
-    weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf')
+    weapon_export_data = WeaponDescriptorNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf'
+    )
 
     with get_session() as session:
         for key, weapon_data in weapon_export_data.items():
@@ -80,7 +88,9 @@ def export_weapons():
 
 
 def export_units():
-    unit_export_data = UniteNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf')
+    unit_export_data = UniteNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf'
+    )
 
     localisation = get_localisation_entries()
 
@@ -96,7 +106,12 @@ def export_units():
 
             if specialties:
                 for spec in specialties:
-                    session.add(UnitSpecialty(unit_export_name=key, specialty_export_key=spec))
+                    session.add(
+                        UnitSpecialty(
+                            unit_export_name=key,
+                            specialty_export_key=spec
+                        )
+                    )
 
             session.add(Unit(export_name=key, **unit_data))
 
@@ -104,7 +119,9 @@ def export_units():
 
 
 def export_unit_specialties():
-    specialty_export_data = UnitSpecialtiesNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/UserInterface/UnitSpecialties.ndf')
+    specialty_export_data = UnitSpecialtiesNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/UserInterface/UnitSpecialties.ndf'
+    )
 
     localisation = get_localisation_entries()
 
@@ -122,7 +139,9 @@ def export_unit_specialties():
 
 
 def export_decks():
-    deck_export_data = DivisionRulesNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/DivisionRules.ndf')
+    deck_export_data = DivisionRulesNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/DivisionRules.ndf'
+    )
 
     with get_session() as session:
 
@@ -160,7 +179,9 @@ def export_decks():
 
 
 def get_armor_types():
-    return ArmureTypeNdfProcessor().parse_file(MODFILES_DIR / 'CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf')
+    return ArmureTypeNdfProcessor().parse_file(
+        MODFILES_DIR / 'CommonData/Gameplay/Constantes/Enumerations/ArmureType.ndf'
+    )
 
 
 def get_localisation_entries():
@@ -176,7 +197,9 @@ def get_localisation_entries():
 
 
 def export_divisions():
-    parsed_divisions = DivisionsNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/Divisions.ndf')
+    parsed_divisions = DivisionsNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Decks/Divisions.ndf'
+    )
     localisation = get_localisation_entries()
 
     with get_session() as session:
@@ -196,8 +219,12 @@ def export_divisions():
 
             name = division_data['name']
             description = division_data['description']
-            pwr_classification = DivisionsNdfProcessor.POWER_CLASSIFICATION_MAP[division_data['power_classification']]
-            type_classification = DivisionsNdfProcessor.TYPE_CLASSIFICATION_MAP[division_data['division_type']]
+            pwr_classification = DivisionsNdfProcessor.POWER_CLASSIFICATION_MAP[
+                division_data['power_classification']
+            ]
+            type_classification = DivisionsNdfProcessor.TYPE_CLASSIFICATION_MAP[
+                division_data['division_type']
+            ]
 
             if division_data['name'] in localisation:
                 name = localisation[division_data['name']]
@@ -223,7 +250,9 @@ def export_divisions():
 
 
 def export_division_cost_matrices():
-    cost_matrix_data = DivisionCostMatrixNdfProcessor().parse_file(MODFILES_DIR / 'GameData/Gameplay/Decks/DivisionCostMatrix.ndf')
+    cost_matrix_data = DivisionCostMatrixNdfProcessor().parse_file(
+        MODFILES_DIR / 'GameData/Gameplay/Decks/DivisionCostMatrix.ndf'
+    )
 
     with get_session() as session:
         for matrix_name, cost_data in cost_matrix_data.items():
@@ -231,11 +260,14 @@ def export_division_cost_matrices():
                 continue
 
             for category_name, cost_values in cost_data.items():
+
+                unit_category = DivisionCostMatrixNdfProcessor.CATEGORY_NAME_MAP[category_name]
+
                 for cost in cost_values:
                     session.add(
                         CostMatrix(
                             export_name=matrix_name,
-                            unit_category_name=DivisionCostMatrixNdfProcessor.CATEGORY_NAME_MAP[category_name],
+                            unit_category_name=unit_category,
                             cost=cost
                         )
                     )

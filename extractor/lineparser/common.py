@@ -32,6 +32,7 @@ class Handler(ABC):
         This method will run after a successful pattern match against
         the actual line.
         """
+        raise NotImplementedError()
 
 
 class ExportParser(Handler):
@@ -78,7 +79,11 @@ class PropertyParser(Handler):
 
     @abstractmethod
     def transform_property(self, matches: Match, storage: BaseStorage):
-        raise NotImplementedError('Parser not implemented!')
+        """
+        Implementing this method, you can transform the output type of
+        the matched property value.
+        """
+        raise NotImplementedError()
 
     def handle(self, matches: Match, storage: BaseStorage):
 
