@@ -1,13 +1,12 @@
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
 from database.Ammunition import Ammunition
 from lineparser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
 from lineparser.common import ExportParser, \
     StringPropertyParser, \
     FloatPropertyParser, \
     FormulaParser, \
-    BoolPropertyParser, \
-    IntPropertyParser
+    BoolPropertyParser
+from lineparser.storage import BaseStorage
+from .NdfExportProcessor import NdfExportProcessor
 
 
 class AmmunitionNdfProcessor(NdfExportProcessor):
@@ -37,13 +36,13 @@ class AmmunitionNdfProcessor(NdfExportProcessor):
             FloatPropertyParser('SuppressDamages', Ammunition.FIELD_SUPPRESS_DMG),
             BoolPropertyParser('TirIndirect', Ammunition.FIELD_INDIRECT_SHOT),
             BoolPropertyParser('TirReflexe', Ammunition.FIELD_DIRECT_SHOT),
-            IntPropertyParser('SupplyCost', Ammunition.FIELD_SUPPLY_COST),
+            FloatPropertyParser('SupplyCost', Ammunition.FIELD_SUPPLY_COST),
             IdlingHitValueParser(),
             MovingHitValueParser(),
             FloatPropertyParser('TempsDeVisee', Ammunition.FIELD_AIM_TIME),
             FloatPropertyParser('TempsEntreDeuxSalves', Ammunition.FIELD_TIME_BETWEEN_BURSTS),
-            IntPropertyParser('NbTirParSalves', Ammunition.FIELD_SHOTS_PER_BURST),
-            IntPropertyParser('AffichageMunitionParSalve', Ammunition.FIELD_AMMUNITION_PER_BURSTS),
+            FloatPropertyParser('NbTirParSalves', Ammunition.FIELD_SHOTS_PER_BURST),
+            FloatPropertyParser('AffichageMunitionParSalve', Ammunition.FIELD_AMMUNITION_PER_BURSTS),
             BoolPropertyParser('PiercingWeapon', Ammunition.FIELD_ARMOR_PIERCING),
             StringPropertyParser(
                 'DamageTypeEvolutionOverRangeDescriptor',

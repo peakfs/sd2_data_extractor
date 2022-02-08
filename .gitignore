@@ -32,6 +32,9 @@ coverage
 .coverage.*
 *,cover
 
+# output
+output/*.*
+
 # except
 !pytest.ini
 

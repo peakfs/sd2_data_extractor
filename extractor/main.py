@@ -29,6 +29,7 @@ from config import ASSETS_DIR, MODFILES_DIR
 
 LOCALISATION_ENTRIES = {}
 
+
 def export_ammunition():
     parsed_ammunition = AmmunitionNdfProcessor().parse_file(
         MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/Ammunition.ndf'
@@ -291,7 +292,7 @@ def main():
 
     tend = process_time()
 
-    print(f'Process ran for: {tend-tstart}(s)')
+    print(f'Process ran for: {tend - tstart}(s)')
 
 
 if __name__ == '__main__':

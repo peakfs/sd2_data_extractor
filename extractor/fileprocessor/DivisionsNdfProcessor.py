@@ -1,4 +1,4 @@
-from lineparser.common import ExportParser, IntPropertyParser, ListParser, StringPropertyParser
+from lineparser.common import ExportParser, FloatPropertyParser, ListParser, StringPropertyParser
 from lineparser.division_fields import DeckParser
 from lineparser.storage import BaseStorage
 from .NdfExportProcessor import NdfExportProcessor
@@ -28,7 +28,7 @@ class DivisionsNdfProcessor(NdfExportProcessor):
             StringPropertyParser('DivisionNationalite', 'nationality'),
             ListParser('DivisionTags', 'tags'),
             DeckParser('decks'),
-            IntPropertyParser('MaxActivationPoints', 'max_activation_points'),
+            FloatPropertyParser('MaxActivationPoints', 'max_activation_points'),
             StringPropertyParser('CostMatrix', 'cost_matrix_name'),
             StringPropertyParser('CountryId', 'country'),
             StringPropertyParser('TypeTexture', 'division_type'),

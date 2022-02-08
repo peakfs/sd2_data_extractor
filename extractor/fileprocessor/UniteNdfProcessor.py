@@ -1,12 +1,11 @@
-from .NdfExportProcessor import NdfExportProcessor
-from lineparser.storage import BaseStorage
-from lineparser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
-from lineparser.common import ExportParser,\
+from lineparser.common import ExportParser, \
     FormulaParser, \
     StringPropertyParser, \
     FloatPropertyParser, \
-    BoolPropertyParser, \
-    IntPropertyParser
+    BoolPropertyParser
+from lineparser.storage import BaseStorage
+from lineparser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
+from .NdfExportProcessor import NdfExportProcessor
 
 
 class UniteNdfProcessor(NdfExportProcessor):
@@ -35,15 +34,15 @@ class UniteNdfProcessor(NdfExportProcessor):
             BoolPropertyParser('IsCommandementUnit', 'is_command_unit'),
             StringPropertyParser('NameToken', 'localisation_key'),
             FormulaParser('Maxspeed', 'max_speed'),
-            IntPropertyParser('MoralLevel', 'morale'),
+            FloatPropertyParser('MoralLevel', 'morale'),
             StringPropertyParser('Nationalite', 'side'),
-            IntPropertyParser('OpticalStrength', 'optics_strength'),
-            IntPropertyParser('ProductionYear', 'production_year'),
+            FloatPropertyParser('OpticalStrength', 'optics_strength'),
+            FloatPropertyParser('ProductionYear', 'production_year'),
             FormulaParser('PorteeVision', 'scope_range'),
             FormulaParser('PorteeVisionTBA', 'scope_range_tba'),
             FloatPropertyParser('SpeedBonusOnRoad', 'speed_bonus_on_road'),
             SpecialtyParser(),
-            IntPropertyParser('RealRoadSpeed', 'real_road_speed'),
+            FloatPropertyParser('RealRoadSpeed', 'real_road_speed'),
             FormulaParser('StartTime', 'start_time'),
             FormulaParser('StopTime', 'stop_time'),
             FloatPropertyParser('TimeBetweenEachIdentifyRoll', 'time_between_identify_rolls'),
