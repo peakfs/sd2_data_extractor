@@ -14,7 +14,7 @@ class TestBaseStorage:
 
         assert expected == sut.data
 
-    def test_lat_item_default_is_none(self):
+    def test_last_item_default_is_none(self):
         expected = None
         sut = BaseStorage()
 

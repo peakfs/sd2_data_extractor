@@ -1,7 +1,6 @@
-from typing import Any
+def strtobool(value: str) -> bool:
+    v = value.lower()
 
-
-def strtobool(value: Any) -> bool:
     truthy_values = (
         'y',
         'yes',
@@ -20,9 +19,9 @@ def strtobool(value: Any) -> bool:
         '0'
     )
 
-    if value in truthy_values:
+    if v in truthy_values:
         return True
-    elif value in falsy_values:
+    elif v in falsy_values:
         return False
     else:
-        raise ValueError(f'Value "{value}" cannot be converted to boolean.')
+        raise ValueError(f'Value "{v}" cannot be converted to boolean.')

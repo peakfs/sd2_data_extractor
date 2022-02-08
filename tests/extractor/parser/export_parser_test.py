@@ -1,8 +1,8 @@
 import pytest
-import re
 
 from extractor.lineparser.common import ExportParser
 from extractor.lineparser.storage import BaseStorage
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
 
 lines_provider = [
     ('export DamageTypeEvolutionOverRangeDescriptor_Chute_Lente is TDamageTypeEvolutionOverRangeDescriptor',
@@ -32,18 +32,23 @@ def storage():
     return BaseStorage()
 
 
+@pytest.fixture
+def processor(storage):
+    return NdfExportProcessor(storage)
+
+
 class TestExportParser:
 
     @pytest.mark.parametrize('line, expected', lines_provider)
-    def test_matches_line(self, parser, line, expected):
-        actual = re.fullmatch(parser.pattern, line)
+    def test_matches_line(self, processor, parser, line, expected):
+        actual = processor.match_line(parser.pattern, line)
 
         assert actual.group(1) == expected
 
-    def test_handle(self, parser, storage):
+    def test_handle(self, processor, parser, storage):
         expected = 'Descriptor_Deck_Division_SOV_88DF_solo'
         line = 'export Descriptor_Deck_Division_SOV_88DF_solo is TDeckDivisionDescriptor'
-        matches = re.fullmatch(parser.pattern, line)
+        matches = processor.match_line(parser.pattern, line)
         parser.handle(matches, storage)
 
         assert expected in storage.data.keys()

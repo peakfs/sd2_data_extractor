@@ -1,6 +1,6 @@
 import re
 
-from lineparser.storage import BaseStorage
+from extractor.lineparser.storage import BaseStorage
 
 
 class NdfExportProcessor:
@@ -32,13 +32,16 @@ class NdfExportProcessor:
                     continue
 
                 for handler in self.handlers:
-                    matches = re.fullmatch(handler.pattern, line)
+                    matches = self.match_line(handler.pattern, line)
 
                     if matches:
                         handler.handle(matches, self.storage)
                         break
 
         return self.finalize()
+
+    def match_line(self, pattern: str, line: str):
+        return re.fullmatch(pattern, line)
 
     def is_garbage_line(self, line: str) -> bool:
         if len(line) == 0 or line.startswith('//') or line in self.garbage_lines:
