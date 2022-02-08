@@ -12,21 +12,19 @@ class HandlerStub(Handler):
 
 
 @pytest.fixture
-def get_handler_stub():
-    return HandlerStub()
-
-
-@pytest.fixture
-def get_handler_stub_with_pattern():
-    return HandlerStub('test-pattern')
+def sut():
+    return HandlerStub
 
 
 class TestHandler:
-    def test_can_create(self, get_handler_stub):
-        assert isinstance(get_handler_stub, Handler)
+    def test_can_create(self, sut):
+        actual = sut()
+        assert isinstance(actual, Handler)
 
-    def test_pattern_is_empty_if_not_set(self, get_handler_stub):
-        assert get_handler_stub.pattern is None
+    def test_pattern_is_empty_if_not_set(self, sut):
+        actual = sut()
+        assert actual.pattern is None
 
-    def test_pattern_is_set(self, get_handler_stub_with_pattern):
-        assert get_handler_stub_with_pattern.pattern == 'test-pattern'
+    def test_pattern_is_set(self, sut):
+        actual = sut('test-pattern')
+        assert actual.pattern == 'test-pattern'
