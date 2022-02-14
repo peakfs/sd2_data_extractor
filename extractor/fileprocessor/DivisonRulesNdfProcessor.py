@@ -1,10 +1,10 @@
-from lineparser.common import BoolPropertyParser, \
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import BoolPropertyParser, \
     FloatPropertyParser, \
     DescriptorListParser, \
     FloatListParser
-from lineparser.divisionrules_fields import DivisionParser, ReferencePropertyParser
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.divisionrules_fields import DivisionParser, ReferencePropertyParser
+from extractor.lineparser.storage import BaseStorage
 
 
 class DivisionRulesNdfProcessor(NdfExportProcessor):

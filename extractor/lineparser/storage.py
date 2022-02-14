@@ -1,6 +1,8 @@
 """
 Contains classes that are responsible for storing the parsed line data.
 """
+
+
 class BaseStorage:
     """
     Basic wrapper over a dictionary. Provides a simple way to store

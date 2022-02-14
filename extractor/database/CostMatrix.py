@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from .base import Base
+from extractor.database.base import Base
 
 
 class CostMatrix(Base):

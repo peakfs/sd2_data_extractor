@@ -1,7 +1,7 @@
 from typing import Match
 
-from .common import Handler, StringIntTupleParser
-from .storage import BaseStorage
+from extractor.lineparser.common import Handler, StringIntTupleParser
+from extractor.lineparser.storage import BaseStorage
 
 
 class UnitWeaponParser(Handler):

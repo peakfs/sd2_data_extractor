@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text
 
-from .base import Base
+from extractor.database.base import Base
 
 
 class Division(Base):

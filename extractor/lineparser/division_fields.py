@@ -1,7 +1,7 @@
 from typing import Match
 
-from .common import Handler
-from .storage import BaseStorage
+from extractor.lineparser.common import Handler
+from extractor.lineparser.storage import BaseStorage
 
 
 class DeckParser(Handler):

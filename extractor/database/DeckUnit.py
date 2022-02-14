@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer, Numeric, Boolean
-from .base import Base
+from extractor.database.base import Base
 
 
 class DeckUnit(Base):

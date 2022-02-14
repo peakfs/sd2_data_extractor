@@ -1,7 +1,7 @@
-from lineparser.common import ExportParser, FloatPropertyParser, ListParser, StringPropertyParser
-from lineparser.division_fields import DeckParser
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import ExportParser, FloatPropertyParser, ListParser, StringPropertyParser
+from extractor.lineparser.division_fields import DeckParser
+from extractor.lineparser.storage import BaseStorage
 
 
 class DivisionsNdfProcessor(NdfExportProcessor):

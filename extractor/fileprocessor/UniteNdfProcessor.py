@@ -1,11 +1,11 @@
-from lineparser.common import ExportParser, \
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import ExportParser, \
     FormulaParser, \
     StringPropertyParser, \
     FloatPropertyParser, \
     BoolPropertyParser
-from lineparser.storage import BaseStorage
-from lineparser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
-from .NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.storage import BaseStorage
+from extractor.lineparser.unit_fields import UnitWeaponParser, CommandPointsCostParser, SpecialtyParser
 
 
 class UniteNdfProcessor(NdfExportProcessor):

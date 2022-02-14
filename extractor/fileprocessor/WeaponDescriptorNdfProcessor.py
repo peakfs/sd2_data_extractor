@@ -1,7 +1,7 @@
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
-from lineparser.weapon_fields import SalvoParser, AmmunitionParser
-from lineparser.common import ExportParser
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import ExportParser
+from extractor.lineparser.storage import BaseStorage
+from extractor.lineparser.weapon_fields import SalvoParser, AmmunitionParser
 
 
 class WeaponDescriptorNdfProcessor(NdfExportProcessor):

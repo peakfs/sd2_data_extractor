@@ -1,7 +1,7 @@
-from lineparser.common import StringPropertyParser
-from lineparser.storage import BaseStorage
-from lineparser.unit_specialties_fields import SpecialtyKeyParser
-from .NdfExportProcessor import NdfExportProcessor
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import StringPropertyParser
+from extractor.lineparser.storage import BaseStorage
+from extractor.lineparser.unit_specialties_fields import SpecialtyKeyParser
 
 
 class UnitSpecialtiesNdfProcessor(NdfExportProcessor):

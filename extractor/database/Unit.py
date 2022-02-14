@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Numeric, Integer, Boolean
-from .base import Base
+from extractor.database.base import Base
 
 
 class Unit(Base):

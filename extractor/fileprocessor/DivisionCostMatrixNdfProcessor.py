@@ -1,6 +1,6 @@
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
-from lineparser.divisioncostmatrix_fields import MatrixNameParser, UnitCategorySlotsParser
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.divisioncostmatrix_fields import MatrixNameParser, UnitCategorySlotsParser
+from extractor.lineparser.storage import BaseStorage
 
 
 class DivisionCostMatrixNdfProcessor(NdfExportProcessor):

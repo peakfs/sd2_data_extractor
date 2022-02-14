@@ -1,12 +1,12 @@
-from database.Ammunition import Ammunition
-from lineparser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
-from lineparser.common import ExportParser, \
+from extractor.database.Ammunition import Ammunition
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.ammunition_fields import IdlingHitValueParser, MovingHitValueParser
+from extractor.lineparser.common import ExportParser, \
     StringPropertyParser, \
     FloatPropertyParser, \
     FormulaParser, \
     BoolPropertyParser
-from lineparser.storage import BaseStorage
-from .NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.storage import BaseStorage
 
 
 class AmmunitionNdfProcessor(NdfExportProcessor):
@@ -37,8 +37,8 @@ class AmmunitionNdfProcessor(NdfExportProcessor):
             BoolPropertyParser('TirIndirect', Ammunition.FIELD_INDIRECT_SHOT),
             BoolPropertyParser('TirReflexe', Ammunition.FIELD_DIRECT_SHOT),
             FloatPropertyParser('SupplyCost', Ammunition.FIELD_SUPPLY_COST),
-            IdlingHitValueParser(),
-            MovingHitValueParser(),
+            IdlingHitValueParser(Ammunition.FIELD_ACCURACY_IDLE),
+            MovingHitValueParser(Ammunition.FIELD_ACCURACY_MOVING),
             FloatPropertyParser('TempsDeVisee', Ammunition.FIELD_AIM_TIME),
             FloatPropertyParser('TempsEntreDeuxSalves', Ammunition.FIELD_TIME_BETWEEN_BURSTS),
             FloatPropertyParser('NbTirParSalves', Ammunition.FIELD_SHOTS_PER_BURST),

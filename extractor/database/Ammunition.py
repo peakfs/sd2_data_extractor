@@ -1,5 +1,5 @@
+from extractor.database.base import Base
 from sqlalchemy import Boolean, Column, Integer, Numeric, String
-from .base import Base
 
 
 class Ammunition(Base):

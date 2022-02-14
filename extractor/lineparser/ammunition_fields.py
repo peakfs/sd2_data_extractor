@@ -1,7 +1,7 @@
 from typing import Match
 
-from .common import Handler
-from .storage import BaseStorage
+from extractor.lineparser.common import Handler
+from extractor.lineparser.storage import BaseStorage
 
 
 class HitValueParser(Handler):
@@ -14,30 +14,32 @@ class HitValueParser(Handler):
 
 
 class IdlingHitValueParser(HitValueParser):
-    KEY_ACCURACY_IDLING = 'accuracy_idle'
+    parsed_field_name = None
 
-    def __init__(self):
+    def __init__(self, parsed_field_name: str):
         pattern = r'^\(\w+\/(Idling),\s?(\d+(.\d+)?)\),?$'
         super(HitValueParser, self).__init__(pattern)
+        self.parsed_field_name = parsed_field_name
 
     def handle(self, matches: Match, storage: BaseStorage):
         try:
             val = float(matches.group(2))
-            storage.data[storage.last_item][self.KEY_ACCURACY_IDLING] = val
+            storage.data[storage.last_item][self.parsed_field_name] = val
         except ValueError:
             pass
 
 
 class MovingHitValueParser(HitValueParser):
-    KEY_ACCURACY_MOVING = 'accuracy_moving'
+    parsed_field_name = None
 
-    def __init__(self):
+    def __init__(self, parsed_field_name: str):
         pattern = r'^\(\w+\/(Moving),\s?(\d+(.\d+)?)\),?$'
         super(HitValueParser, self).__init__(pattern)
+        self.parsed_field_name = parsed_field_name
 
     def handle(self, matches: Match, storage: BaseStorage):
         try:
             val = float(matches.group(2))
-            storage.data[storage.last_item][self.KEY_ACCURACY_MOVING] = val
+            storage.data[storage.last_item][self.parsed_field_name] = val
         except ValueError:
             pass

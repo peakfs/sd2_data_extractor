@@ -1,6 +1,6 @@
-from .NdfExportProcessor import NdfExportProcessor
-from lineparser.storage import BaseStorage
-from lineparser.common import ExportParser, FloatTupleParser
+from extractor.fileprocessor.NdfExportProcessor import NdfExportProcessor
+from extractor.lineparser.common import ExportParser, FloatTupleParser
+from extractor.lineparser.storage import BaseStorage
 
 
 class DTEORDNdfProcessor(NdfExportProcessor):

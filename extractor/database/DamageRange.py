@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Numeric, Integer
-from .base import Base
+from extractor.database.base import Base
 
 
 class DamageRange(Base):

@@ -4,8 +4,8 @@ Contains data parsing classes that are commonly used in fileprocessors.
 from abc import ABC, abstractmethod
 from typing import Match
 
+from extractor.lineparser.storage import BaseStorage
 from extractor.utils import strtobool
-from .storage import BaseStorage
 
 
 class Handler(ABC):

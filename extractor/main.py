@@ -2,30 +2,29 @@
 import csv
 from time import process_time
 
-from database.Ammunition import Ammunition
-from database.CostMatrix import CostMatrix
-from database.DamageRange import DamageRange
-from database.Deck import Deck
-from database.DeckUnit import DeckUnit
-from database.Division import Division
-from database.DivisionDeck import DivisionDeck
-from database.Specialty import Specialty
-from database.Unit import Unit
-from database.UnitSpecialty import UnitSpecialty
-from database.UnitTransport import UnitTransport
-from database.WeaponAmmunition import WeaponAmmunition
-from database.base import create_schemas, get_session
-from fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
-from fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
-from fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
-from fileprocessor.DivisionCostMatrixNdfProcessor import DivisionCostMatrixNdfProcessor
-from fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
-from fileprocessor.DivisonRulesNdfProcessor import DivisionRulesNdfProcessor
-from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
-from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
-from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
-
-from config import ASSETS_DIR, MODFILES_DIR
+from extractor.config import ASSETS_DIR, MODFILES_DIR
+from extractor.database.Ammunition import Ammunition
+from extractor.database.CostMatrix import CostMatrix
+from extractor.database.DamageRange import DamageRange
+from extractor.database.Deck import Deck
+from extractor.database.DeckUnit import DeckUnit
+from extractor.database.Division import Division
+from extractor.database.DivisionDeck import DivisionDeck
+from extractor.database.Specialty import Specialty
+from extractor.database.Unit import Unit
+from extractor.database.UnitSpecialty import UnitSpecialty
+from extractor.database.UnitTransport import UnitTransport
+from extractor.database.WeaponAmmunition import WeaponAmmunition
+from extractor.database.base import create_schemas, get_session
+from extractor.fileprocessor.AmmunitionNdfProcessor import AmmunitionNdfProcessor
+from extractor.fileprocessor.ArmureTypeNdfProcessor import ArmureTypeNdfProcessor
+from extractor.fileprocessor.DTEORDNdfProcessor import DTEORDNdfProcessor
+from extractor.fileprocessor.DivisionCostMatrixNdfProcessor import DivisionCostMatrixNdfProcessor
+from extractor.fileprocessor.DivisionsNdfProcessor import DivisionsNdfProcessor
+from extractor.fileprocessor.DivisonRulesNdfProcessor import DivisionRulesNdfProcessor
+from extractor.fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
+from extractor.fileprocessor.UniteNdfProcessor import UniteNdfProcessor
+from extractor.fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
 
 LOCALISATION_ENTRIES = {}
 
