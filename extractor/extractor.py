@@ -24,6 +24,9 @@ from fileprocessor.DivisonRulesNdfProcessor import DivisionRulesNdfProcessor
 from fileprocessor.UnitSpecialtiesNdfProcessor import UnitSpecialtiesNdfProcessor
 from fileprocessor.UniteNdfProcessor import UniteNdfProcessor
 from fileprocessor.WeaponDescriptorNdfProcessor import WeaponDescriptorNdfProcessor
+from converter.NdfToJsonConverter import NdfToJsonConverter
+from fileprocessor.UniteJsonProcessor import UniteJsonProcessor
+import json
 
 from config import ASSETS_DIR, MODFILES_DIR
 
@@ -116,6 +119,18 @@ def export_units():
             session.add(Unit(export_name=key, **unit_data))
 
         session.commit()
+
+def export_units2():
+
+    converter = NdfToJsonConverter()
+    converter.collectDebugMessages = False
+    unit_export_data = converter.convert_file(
+        MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/UniteDescriptor.ndf'
+        # MODFILES_DIR / 'GameData/Generated/Gameplay/Gfx/Foo.ndf'
+    )
+    
+    res = UniteJsonProcessor().mapItems(unit_export_data)
+    print('\n------\n', json.dumps(res, indent=4))
 
 
 def export_unit_specialties():
@@ -282,6 +297,7 @@ def main():
 
     export_unit_specialties()
     export_units()
+    # export_units2()
     export_ammunition()
     export_divisions()
     export_division_cost_matrices()
